@@ -1,4 +1,4 @@
-BOOK_FILENAME = "Group Theory.pdf"
+BOOK_FILENAME = "Groups, Actions and Representations.pdf"
 TEMP_FILES_FOLDER = generated_files
 
 pdflatex:
