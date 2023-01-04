@@ -1,0 +1,132 @@
+
+\section{Introduction}
+
+In this chapter, we'll introduce algebraic structures required to understand how to manipulate groups. We begin with binary relations, which are the underlying set-theoretical construct for functions, which are required to build most of mathematics, and is especially important at the foundational level.
+\\
+
+We'll take for granted a naive mathematical understanding of the notion of a set~:
+\\
+
+\begin{itemize}
+	\item[$\bullet$] Sets are collections of other sets defined by the relation of containment ($\in$), e.g. $A = \{1,2,3\}$ means that the only sets $B$ satisfying $B \in A$ are $B=1$, $B=2$ and $B=3$. So in particular, duplicating elements within a set has no additional effect (i.e. $\{1,2,3\} = \{1,2,2,3,3,3\}$). We allow it notationally, but the set $\{1,2,3,3\}$ is the same as the set $\{1,2,3\}$; this means we have to be careful when counting elements of a finite set if they are listed via a formula.
+	\\
+
+	\item[$\bullet$] There is no infinite descending chain of containment of the form $A_1 \ni A_2 \ni \cdots$; in particular, $A \notin A$.
+	\\
+
+	\item[$\bullet$] Sets are defined by the elements they contain. Therefore, two sets are considered equal if they contain the same elements, i.e. $A=B$ means that for any set $C$, we have $C \in A$ if and only if $C \in B$. 
+	\\
+
+	\item[$\bullet$] If $I$ is a set (which we will call in this context an \textbf{index set}, but there is nothing special about $I$ as a set), and for each $i \in I$, we are given a set $A_i$, we call the collection $\{A_i\}_{i \in I}$ a \textbf{family of sets}.
+	\\
+\end{itemize}
+
+\begin{definition} \label{binary-product-of-sets}
+	Let $A,B$ be two sets. An \textbf{ordered pair} of elements of $A$ and $B$ is a set of the form $\{\{a\}, \{a,b\}\}$ where $a \in A$ and $b \in B$; we commonly denote this pair via $(a,b)$ (this is Kuratowski's definition of a pair). The set of all pairs of elements of $A$ and $B$ is denoted by $A \times B$ and is called the \textbf{binary product} of $A$ and $B$. 
+\end{definition}
+
+\begin{remark}
+	It is possible to recover the elements $a$ and $b$ from the data of the ordered pair $(a,b)$. Indeed, the element $a$ is the unique set satisfying
+	\[
+		\forall x \in (a,b), \quad a \in x
+	\]
+	(i.e. $a$ is an element of all elements of $(a,b)$) and the element $b$ is the unique set satisfying
+	\[
+		( \, \exists x \in (a,b) \st b \in x \, ) \wedge 
+		( \, \forall x,y \in (a,b), \quad x \neq y \implies b \notin x \vee b \notin y \, ).
+	\]
+	(i.e. either $a=b$, so that $(a,b) = \{\{a\}, \{a\}\} = \{\{a\}\}$ and $b \in x$ for all $x \in (a,b)$, or $a \neq b$ so that $(a,b)$ has two elements, and $b$ is in precisely one of them).
+	\\
+
+	Remember those constructions for later~: we'll denote them by $(a,b) \mapsto a$ and $(a,b) \mapsto b$, called the \textbf{first and second projections} of $A \times B$.
+\end{remark}
+
+\begin{definition} \label{binary-relations}
+	Let $A$, $B$ and $C$ be sets.
+	\\
+
+	\begin{itemize}
+		\item[(i)] A \textbf{binary relation} $\sim\,~: A \to B$, or $R : A \to B$ if using a letter notation, is a subset of $A \times B$. We write $R(a,b)$ or $a \sim b$ to indicate that $(a,b) \in R$; on the other hand, we write $\neg R(a,b)$ or $a\not \sim b$ to indicate that $(a,b) \notin R$. 
+		\\
+		
+		When we want to discuss properties of relations, we tend to use letters such as $R : A \to B$ to denote them~; otherwise, when we want to discuss properties of elements affected by the relation, we tend to use symbols such as $\sim$, $\simeq$ or $\equiv$ for example.
+		\\
+
+		The set $A$ is called the \textbf{domain} of the relation, written $A = \dom R$ and the set $B$ is called the \textbf{codomain} of the relation, written $B = \cod R$. 
+		\\
+
+		\item[(ii)] Given a binary relation $R: A \to B$, the \textbf{transpose relation} is defined by 
+		\[
+				R^{\top} \defn \{ (a,b) \in A \times B \, \mid \, (b,a) \in R \}
+		\]
+		Note that $R^{\top} : B \to A$ and that $(R^{\top})^{\top} = R$.
+		\\
+
+		\item[(iii)] Given a binary relation $R: A \to B$, the set
+		\[
+			\{ b \in B \, \mid \, \exists a \in A \st a \sim b \}
+		\]
+		is called the \textbf{image} of the relation $R$ and is denoted by $\ima R$ or $R(A)$. Also, the set
+		\[
+			\{ a \in A \, \mid \, \exists b \in B \st a \sim b \}
+		\]
+		is called the \textbf{coimage} of the relation $R$ and is denoted by $\coim R$ or $R^{\top}(B)$. Note that by definition, we have $\ima R^{\top} = \coim R$, so the second notation is coherent.
+		\\
+		
+		\item[(iv)] The relation $\sim \,\,: A \to B$ is called
+			\begin{itemize}
+				\item[$\bullet$] a \textbf{partial function} or a \textbf{univalent relation} if for every $x \in A$ and $y,z \in B$, $x \sim y$ and $x \sim z$ implies $y=z$ (so that at most one element is related to $x$ in $A$); in this case, we denote the partial function with a letter $f: A \dashrightarrow B$ and if $x \sim y$, we write $y \defn f(x)$ 
+				\item[$\bullet$] \textbf{total} if for every $x \in A$, there exists $y \in B$ with $x \sim y$, i.e. $\coim R = A$
+				\item[$\bullet$] a \textbf{function} if it is univalent and total; in this case, we denote the function with a full arrow $f: A \to B$
+				\item[$\bullet$] \textbf{injective} if $R^{\top}$ is univalent, i.e. if $x_1,x_2 \in A$ and $y \in B$ satisfy $x_1 \sim y$ and $x_2 \sim y$, then $x_1 = x_2$
+				\item[$\bullet$] \textbf{surjective} if $R^{\top}$ is total, i.e. for all $y \in B$, there exists $x \in A$ with $x \sim y$, i.e. $\ima R = B$
+				\item[$\bullet$] \textbf{bijective} if it is both injective and surjective, i.e. for all $y \in B$, there exists a unique $x \in A$ with $x \sim y$, i.e. if $R^{\top}$ is a function.
+				\item[$\bullet$] an \textbf{injection} (resp. \textbf{surjection}, \textbf{bijection}) if it is an injective (resp. surjective, bijective) function.
+				\\
+			\end{itemize}
+	\end{itemize}
+\end{definition}
+
+\begin{remark}
+	Let $f : A \to B$ be a binary relation. Then $f$ is a bijective function if and only if $f^{\top} : B \to A$ is a bijective function. This is because both statements are equivalent to $R$ and $R^{\top}$ being univalent and total.
+\end{remark}
+
+\begin{lemma}
+	Let $R: A \to B$ be a binary relation. Consider the relation $R' : \coim R \to B$ given for $(a,b) \in \coim R \times B$ by $R'(a,b)$ if and only if $R(a,b)$. Then $R'$ is total. 
+\end{lemma}
+
+\begin{proof}
+	By definition, $\coim R = \{ a \in A \, \mid \, \exists b \in B \st R(a,b) \}$. Since $R(a,b)$ if and only if $R'(a,b)$, we deduce that $R'$ is total.
+\end{proof}
+
+\begin{corollary}
+	Let $R : A \to B$ be a partial function. The relation $R' : \coim R \to B$, given for $(a,b) \in \coim R \times B$ by $R'(a,b)$ if and only if $R(a,b)$, is a function. 
+\end{corollary}
+
+\begin{proof}
+	We already know that $R'$ is total, so we have to show it is univalent, i.e. that for every $x \in \coim R$ and $y,z \in B$, $R'(x,y)$ and $R'(x,z)$ implies $y=z$. But this is true of $R$ and $\coim R \subseteq A$, and the relations hold for $R$ if and only if they hold for $R'$, so $R'$ is univalent. Since $R'$ is univalent and total, it is a function.
+\end{proof}
+
+\begin{lemma}
+	Let $R : A \to B$ be a binary relation. Consider the relation $R' : A \to \ima R$ given for $(a,b) \in A \times \ima R$ by $R'(a,b)$ if and only if $R(a,b)$. Then $R'$ is surjective.
+\end{lemma}
+
+\begin{proof}
+	By definition of $\ima R$, for every $b \in \cod R'$, we can find $a \in A$ with $R(a,b)$, e.g. $R'(a,b)$, since $\cod R' = \ima R$ by construction. It follows that $R'$ is surjective.
+\end{proof}
+
+\begin{corollary}
+	Let $R : A \to B$ be an injective binary relation. The relation $R' : A \to \ima R$, given for $(a,b) \in A \times \ima R$ by $R'(a,b)$ if and only if $R(a,b)$, is bijective.
+\end{corollary}
+
+\begin{proof}
+	We already know that $R'$ is surjective. Using a similar argument as previously, we see that $R'$ is injective because $R$ is injective. Therefore, $R$ is bijective.
+\end{proof}
+
+\begin{corollary}
+	Let $R : A \to B$ be an injective partial function. The relation $R' : \coim R \to \ima R$ given by $R'(a,b)$ if and only if $R(a,b)$ is a bijective function.
+\end{corollary}
+
+\begin{proof}
+	It suffices to apply the two previous corollaries, noting along the way that since the relations involved are always defined by the same subset of $A \times B$, the various images and coimages are all equal, so we can chain the results together.
+\end{proof}

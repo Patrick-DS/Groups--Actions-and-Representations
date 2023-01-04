@@ -1,0 +1,127 @@
+
+\section{Properties of relations}
+
+In this section, we study the notion of univalence and totality, and observe how it relates to injectivity and surjectivity, both in the case of relations and functions.
+
+
+\begin{proposition} \label{properties-of-relations-under-composition}
+	Let $R : A \to B$ and $S : B \to C$ be two binary relations. 
+	\begin{itemize}
+		\item[(i)] If $R$ and $S$ are partial functions, then $S \circ R$ is a partial function.
+		\item[(ii)] If $R$ and $S$ are total, then $S \circ R$ is total.
+		\item[(iii)] If $R$ and $S$ are functions, then $S \circ R$ is a function.
+		\item[(iv)] If $R$ and $S$ are injective, then $S \circ R$ is injective.
+		\item[(v)] If $R$ and $S$ are surjective, then $S \circ R$ is surjective.
+		\item[(vi)] If $R$ and $S$ are bijective, then $S \circ R$ is bijective.
+	\end{itemize}
+\end{proposition}
+
+\begin{proof}
+	\begin{itemize}
+		\item[(i)] Let $a \in A$ and $c_1,c_2 \in c$ such that $(S \circ R)(a,c_1)$ and $(S \circ R)(a,c_2)$. Then there exists $b_1, b_2 \in B$ such that for $i=1,2$, we have $R(a,b_i)$ and $S(b_i, c_i)$. Since $R$ is a partial relation, we have $b_1 = b_2$. Since $S$ is a partial relation, we have $c_1 = c_2$. Therefore, $S \circ R$ is a partial relation.
+		\\
+
+		\item[(ii)] Let $a \in A$. Since $R$ is total, there exists $b \in B$ with $R(a,b)$. Since $S$ is total, there exists $c \in C$ with $S(b,c)$. Therefore, $(S \circ R)(a,c)$ via the existence of $b$. It follows that $S \circ R$ is total.
+
+		\item[(iii)] This follows from the proof of (i) and (ii) by definition.
+
+		\item[(iv)] This follows from (i) applied to $R^{\top}$ and $S^{\top}$ together with Lemma \autoref{transpose-of-relation-composition}.
+		\item[(v)] This follows from (ii) applied to $R^{\top}$ and $S^{\top}$ together with Lemma \autoref{transpose-of-relation-composition}.
+		\item[(vi)] This follows from (iii) applied to $R^{\top}$ and $S^{\top}$ together with Lemma \autoref{transpose-of-relation-composition}.
+	\end{itemize}
+\end{proof}
+
+\begin{theorem} \label{calculus-of-relations}
+	Let $R : A \to B$ be a relation. Then $R$ is
+	\\
+
+	\begin{itemize}
+		\item[(i)] univalent if and only if $R \circ R^{\top} \subseteq \id B$
+		\\ 
+
+		\item[(ii)] total if and only if $\id A \subseteq R^{\top} \circ R$
+		\\
+
+		\item[(iii)] injective if and only if $R^{\top} \circ R \subseteq \id A$
+		\\
+
+		\item[(iv)] surjective if and only if $\id B \subseteq R \circ R^{\top}$.
+		\\
+	\end{itemize}
+\end{theorem}
+
+\begin{proof}
+	First, note that by definition, we have
+	\[
+		R^{\top} \circ R = \{ (a_1,a_2) \in A \times A \, | \, \exists b \in B \st R(a_1,b) \quad \text{and} \quad R(a_2,b) \}
+	\]
+	and
+	\[
+		R \circ R^{\top} = \{ (b_1,b_2) \in B \times B \, | \, \exists a \in A \st R(a,b_1) \quad \text{and} \quad R(a,b_2) \}.
+	\]
+	\begin{itemize}
+		\item[(i)] ($\Rightarrow$) Suppose $R$ is univalent, and that $a \in A$ and $b_1,b_2 \in B$ satisfy $R(a,b_1)$ and $R(a,b_2)$. By univalence of $R$, $b_1 = b_2$. It follows that elements of $R \circ R^{\top}$ have equal coordinates, giving $R \circ R^{\top} \subseteq \id B$.
+		\\
+		
+		($\Leftarrow$) Suppose $a \in A$ and $b_1,b_2 \in B$ satisfyi $R(a,b_1)$ and $R(a,b_2)$. This implies $(b_1,b_2) \in R \circ R^{\top} \subseteq \id B$, therefore $b_1 = b_2$. We deduce that $R$ is univalent. 
+		\\
+
+		\item[(ii)] ($\Rightarrow$) Suppose $R$ is total. To show that $\id A \subseteq R^{\top} \circ R$, for every $a \in A$, we need to find $b \in B$ with $R(a,b)$. But this follows from the totality of $R$.
+		\\
+
+		($\Leftarrow$) Suppose $\id A \subseteq R^{\top} \circ R$. Then for each $a \in A$, there exists $b \in B$ with $R(a,b)$. We deduce that $R$ is total.
+		\\
+
+		\item[(iii)] The relation $R$ is injective if and only if $R^{\top}$ is univalent, so this follows from (i).
+		\\
+
+		\item[(iv)] The relation $R$ is surjective if and only if $R^{\top}$ is total, so this follows from (ii).
+	\end{itemize}
+\end{proof}
+
+\begin{theorem}
+	Let $F : A \to B$ be a function. Then $F$ is
+	\\
+	\begin{itemize}
+		\item[(i)] an injection if and only if there exists a univalent relation $G : B \to A$ such that $\id A \subseteq G \circ F$, in which case $G$ is surjective
+		\\
+
+		\item[(ii)] a surjection if and only if there exists a total relation $G : B \to A$ such that $F \circ G \subseteq \id B$, in which case $G$ is injective
+		\\
+
+		\item[(iii)] a bijection if and only if there exists a function $G : B \to A$ with $F \circ G = \id A$ and $G \circ F = \id B$, in which case $G$ is also a bijection equal to $F^{\top}$. 
+		\\
+	\end{itemize}
+\end{theorem}
+
+\begin{proof}
+	\begin{itemize}
+		\item[(i)] ($\Rightarrow$) Let $G \defn F^{\top}$. The relation $F^{\top}$ is univalent by definition of injectivity. By Theorem \autoref{calculus-of-relations}, since $F$ is an injection, we have $G \circ F = F^{\top} \circ F = \id A$.
+		\\
+
+		($\Leftarrow$) Suppose $a_1,a_2 \in A$ and $b \in B$ satisfy $F(a_1,b)$ and $F(a_2,b)$ (in functional notation, this means $b \defn F(a_1) = F(a_2)$). Since $\id A \subseteq G \circ F$, we have $(G \circ F)(a_i,a_i)$ for $i=1,2$. In general form, this means that there exists $b_i \in B$ such that $F(a_i,b_i)$ and $G(b_i,a_i)$~; but $F$ is a function, so $b_i = b$ for $i=1,2$. Since $G(b,a_1)$ and $G(b,a_2)$, we have $a_1 = a_2$ because $G$ is univalent.
+		\\
+
+		We want to show that $F \subseteq G^{\top}$ (as subsets of $A \times B$). Since $\id A \subseteq G \circ F$, this means that for every $a \in A$, we have $(a,F(a)) \in F$ and $(F(a), a) \in G$, i.e. $(a, F(a)) \in G^{\top}$. These are all the elements of $F$, thus $F \subseteq G^{\top}$. It follows that $\id A \subseteq G \circ F \subseteq G \circ G^{\top}$, which means $G$ is surjective by Theorem \autoref{calculus-of-relations}.
+		\\
+
+		\item[(ii)] ($\Rightarrow$) Again, let $G \defn F^{\top}$. The relation $F^{\top}$ is total by definition of surjectivity. By Theorem \autoref{calculus-of-relations}, since $F$ is a surjection, we have $F \circ G = F \circ F^{\top} = \id B$. 
+		\\
+
+		($\Leftarrow$) Let $b \in B$. The relation $G$ is total, so there exists $a \in A$ with $G(b,a)$. Let $b' \in B$ such that $F(a,b')$ (e.g. $b' \defn F(a)$ in functional notation). We claim that $b' = b$. Indeed, $G(b,a)$ and $F(a,b')$ means that $(F \circ G)(b,b')$ holds. But $F \circ G \subseteq \id B$, so $b=b'$. 
+		\\
+
+		We want to show that $G^{\top} \subseteq F$. Suppose $G^{\top}(a,b)$, i.e. $G(b,a)$. Since $F$ is a function, we also have $F(a,b')$ for $b' \in B$. Since $F \circ G \subseteq \id B$, this means $(b,b') \in \id B$, e.g. $b=b'$ and thus $F(a,b)$. We deduce that $G^{\top} \circ G \subseteq F \circ G \subseteq \id B$, which shows that $G$ is injective.
+		\\
+
+		\item[(iii)] Both $F$ and $G$ are functions, so we can stick to functional notation.
+		\\
+		($\Rightarrow$) The relation $G \defn F^{\top}$ is a function since $F$ is bijective, and $G$ is bijective since $F$ is a function. Theorem \autoref{calculus-of-relations} shows that $F \circ G = \id B$ and $G \circ F = \id A$ since $F$ is a bijection.
+		\\
+
+		($\Leftarrow$) By (i) and (ii), if $G$ exists with $F \circ G = \id B$ and $G \circ F = \id A$, then $F$ is an injection and a surjection, thus a bijection.
+		\\
+
+		Let $b \in B$. Since $F(G(b)) = F(F^{\top}(b))$ and $F$ is injective, we deduce that $G(b) = F^{\top}(b)$. We deduce that $G = F^{\top}$.
+	\end{itemize}
+\end{proof}
