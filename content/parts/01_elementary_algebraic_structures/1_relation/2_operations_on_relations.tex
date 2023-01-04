@@ -1,0 +1,125 @@
+\section{Operations on relations}
+
+\begin{definition}
+	Let $A,B$ and $C$ be sets.
+	\begin{itemize}
+		\item[(i)] The set of all relations of the form $R : A \to B$ is denoted by $\Rel AB$~: note that by definition, it is equal to $\pow{A \times B}$ since relations from $A$ to $B$ are just subsets of $A \times B$. The set of all relations of the form $R : A \to A$ can alternatively be denoted by $\End{\REL}A$. 
+		\\
+
+		\item[(ii)] The set of all functions $f: A \to B$ is denoted by $B^A$ or $\Hom{\SET}AB$. Note that by definition, $B^A \subseteq \Rel AB$. The set of all functions $f : A \to A$ can alternatively be denoted by $\End{\SET}A$. (These notations will make more sense when we discuss categories, since those binary relations will arise as endomorphisms of certain categories, whence the notation.)
+		\\
+
+		\item[(iii)] Given a binary relation $R: A \to B$, the \textbf{complement relation} is defined by
+		\[
+			R^{\complement} \defn \{ (a,b) \in A \times B \, \mid \, (a,b) \notin R \}.
+		\]
+		Note that $R^{\complement} : A \to B$ and $(R^{\complement})^{\complement} = R$.
+		\\
+
+		\item[(iv)] Let $R : A \to B$ and $S: B \to C$ be two binary relations. Their \textbf{composition} is the binary relation $S \circ R$ given by 
+		\[
+				S \circ R \defn \{ (a,c) \in A \times C \, \mid \, \exists b \in B \st (a,b) \in R \text{ and } (b,c) \in S \}.
+		\]
+
+		\item[(v)] A \textbf{binary function} is a function $\star : A \times B \to C$. In the case of binary functions, if $(a,b) \in A \times B$, instead of writing $\star((a,b)) = c$, we can write $a \star b = c$, and this choice will usually be indicated by choosing a symbol instead of a letter to denote the binary function.
+		\\
+	\end{itemize}
+\end{definition}
+
+\begin{example}
+	Let $A,B,C$ be sets. Given a relation $R : A \to B$ and a relation $S : B \to C$, we can produce the relation $S \circ R : A \to C$. This defines a binary function 
+	\[
+		\circ : \Rel BC \times \Rel AB \to \Rel AC, \quad (S, R) \mapsto S \circ R. 
+	\]
+	This is our first example of a binary function, but we will come across them regularly. We can do the same thing with functions~:
+	\[
+		\circ : \Hom{\SET}BC \times \Hom{\SET}AB \to \Hom{\SET}AC, \quad (g, f) \mapsto g \circ f. 
+	\]
+	These particular binary functions are very important in the context of categories~; we'll revisit them later.
+\end{example}
+
+\begin{remark}
+	We write $S \circ R$ and not $R \circ S$ for the composition of two relations to make the notation agree with the composition of two functions $f: A \to B$ and $g : B \to C$ where $(g \circ f)(a) = g(f(a))$ for $a \in A$. Authors studying relations choose the opposite convention, but it is a matter of choice of notation, it won't have any impact on the proofs.
+\end{remark}
+
+
+\begin{lemma} \label{transpose-of-relation-composition}
+	If $R : A \to B$ and $S : B \to C$ are two relations, then $(S \circ R)^{\top} = R^{\top} \circ S^{\top}$.
+\end{lemma}
+
+\begin{proof}
+	Let $a \in A$, $c \in C$. Then $(S \circ R)^{\top}(c,a)$ is equivalent to $(S \circ R)(a,c)$, which is equivalent to the existence of $b \in B$ with $R(a,b)$ and $S(b,c)$. The latter relations are equivalent to $R^{\top}(b,a)$ and $S^{\top}(c,b)$ respectively, thus $(S \circ R)(a,c)$ is equivalent to $(R^{\top} \circ S^{\top})(c,a)$, which is what we wanted to prove.  
+\end{proof}
+
+\begin{example}
+	For every set $A$, there is a special binary relation called the \textbf{identity} and denoted by $\id A : A \to A$. It is defined as 
+	\[
+		\id A = \{ (a,a) \in A \times A \, \mid \, a \in A \}.
+	\]
+	It is a function, and in functional notation, $\id A(a) \defn a$. 
+\end{example}
+
+\begin{example} \label{relation-tranpose-is-an-involution}
+	Let $A,B$ be sets. Given a relation $R : A \to B$, we can produce the relation $R^{\top} : B \to A$. This defines a function
+	\[
+		(-)^{\top} : \Rel AB \to \Rel BA, \quad R \mapsto R^{\top}.
+	\]
+	Since the transpose of the transpose of a relation is the same relation, we see that 
+	\[
+		(-)^{\top} \circ (-)^{\top} = \id{\Rel AB}
+	\]
+	(as elements of $\End{\SET}{\Rel AB}$). 
+	\\
+	
+	Note that the first $(-)^{\top}$ and the second $(-)^{\top}$ in the equality are not the same functions (they do not share domains and codomains, for example). But we omit to add subscripts or indications to distinguish the two because it is a \textbf{natural} function, a concept that we will explore in great detail in this book. In simpler terms, because the operation of transposing is just to "flip the relation", regardless of what relation we are discussing, we can somehow hide the details of what relations we are talking about in certain contexts. 
+\end{example}
+
+\begin{proposition} \label{the-identity-function-is-identity-for-relations}
+	Let $R : A \to B$ be a binary relation. Then $R \circ \id A = R$ and $\id B \circ R = R$. 
+\end{proposition}
+
+\begin{proof}
+	Let $(a,b) \in A \times B$. We have $(R \circ \id A)(a,b)$ if and only if there exists $a' \in A$ with $\id A(a,a')$ and $R(a',b)$. But the only $a' \in A$ with $\id A(a, a')$ is $a$ itself, so $(R \circ \id A)(a,b)$ is equivalent to $R(a,b)$, which proves $R \circ \id A = R$.
+	\\
+	
+	A similar approach would work for the other equality, but note that $\id B^{\top} = \id B$, so by Lemma \autoref{transpose-of-relation-composition}, we have
+	\[
+		(\id B \circ R)^{\top} = R^{\top} \circ \id B^{\top} = R^{\top} \circ \id B = R^{\top}
+	\]
+	which means that $\id B \circ R = R$ by Example \autoref{relation-tranpose-is-an-involution}. 
+\end{proof}
+
+\begin{remark}
+	The identity function gives a counter-example to the proposed equality $(S \circ R)^{\complement} = S^{\complement} \circ R^{\complement}$ (which would be the "correct" order if it worked, but the counter-example also proves the other way around doesn't hold). 
+	\\
+
+	Let $A$ be a set which contains at least three elements and consider $R = S = \id A$, so that $S \circ R = \id A$ by Proposition \autoref{the-identity-function-is-identity-for-relations}. The relation $\id A^{\complement} \circ \id A^{\complement}$ consists of all pairs $(a_1,a_2) \in A \times A$ for which there exists $a_3 \in A$ with $a_1 \neq a_3$ and $a_2 \neq a_3$. Since $A$ has at least three elements, we deduce that $\id A^{\complement} \circ \id A^{\complement} = A \times A$, but $\id A^{\complement}$ does not contain the elements in $\id A$ (seeing $\id A$ as a subset of $A \times A$). 
+	\\
+	
+	Therefore, $\id A^{\complement} \circ \id A^{\complement} \neq \id A^{\complement}$, so it is not true in general that $(S \circ R)^{\complement} = S^{\complement} \circ R^{\complement}$ or that $(S \circ R)^{\complement} = R^{\complement} \circ S^{\complement}$.
+\end{remark}
+
+\begin{example}
+	Here are some examples of functions~:
+	\\
+
+	\begin{itemize}
+		\item[$\bullet$] Let $A$ be a set. The function $\{-\} : A \to \pow A$ which sends $a \mapsto \{a\}$ is called the \textbf{singleton map}. The name comes from the fact that a set with only one element is called a \textbf{singleton}.
+		\\
+
+		\item[$\bullet$] Let $A,B$ be sets. There are two functions $\pi_A : A \times B \to A$ and $\pi_B : A \times B \to B$ given by $(a,b) \mapsto a$ and $(a,b) \mapsto b$, respectively. These are called the \textbf{canonical projection maps}.
+		\\
+
+		\item[$\bullet$] Let $A$ be a set. The relation $\varnothing : \varnothing \to A$ is trivially univalent and total, and therefore is a function. However, it doesn't have any elements in its domain (by construction). In fact, $\Hom{\SET}{\varnothing}A$ is always a singleton because of this fact~; we call this unique function the \textbf{empty function}.
+		\\
+
+		\item[$\bullet$] Let $A$ be a set and $B$ be a singleton. The relation $R : A \to B$ given by $R = A \times B$ is a surjective function. In fact, it is the unique relation from $A$ to $B$ which is a function because the only element of $B$ gives only one possible image to all the elements of $A$. From this, we also deduce that $\Rel AB = \{ C \times B \, | \, C \in \pow A \}$, and at the exception of the empty relation, any relation $R : A \to B$ is a surjective partial function. The empty relation is also a partial function (tautologically), but it is not surjective.
+		\\
+		
+		A function $f : A \to B$ with $\ima f$ being a singleton (regardless of if $B$ is a singleton or not) is called a \textbf{constant map}.
+	\end{itemize}
+\end{example}
+
+\begin{remark}
+	The term "map" to designate a function is common. In real analysis, maps usually mean continuous functions, but by abuse of languages, a lot of mathematicians use the term "map" to mean other things. This is one of the reasons we gave some examples.
+\end{remark}

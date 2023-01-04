@@ -1,0 +1,44 @@
+%---------------------------------------------------------------------------------------
+%	PACKAGE CONFIGURATION
+%---------------------------------------------------------------------------------------
+
+% Page margins
+\usepackage[
+    top=3cm,
+    bottom=3cm,
+    left=2cm,
+    right=2cm,
+    headsep=10pt,
+    a4paper
+]{geometry} 
+
+% Required for including assets such as pictures
+\usepackage{graphicx} 
+% Specifies the directory where assets are stored
+\graphicspath{{assets/}} 
+
+% For inserting dummy text
+\usepackage{lipsum} 
+
+% Required for drawing custom shapes
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows,decorations.pathmorphing}
+
+% English language/hyphenation
+\usepackage[english]{babel} 
+
+% Customize lists
+\usepackage{enumitem} 
+% Reduce spacing between bullet points and numbered lists
+\setlist{nolistsep} 
+
+% Required for nicer horizontal rules in tables
+\usepackage{booktabs} 
+
+% Required for specifying colors by name
+\usepackage{xcolor} 
+% Define the orange color used for highlighting throughout the book
+\definecolor{ocre}{RGB}{243,102,25} 
+
+%---------------------------------------------------------------------------------------

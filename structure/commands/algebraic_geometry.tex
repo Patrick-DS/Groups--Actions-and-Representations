@@ -1,0 +1,243 @@
+% Tilde operators for modules
+\newcommand{\projtilde}[1]{\overset{\mbox{}\scalebox{1.2}[0.7]{$\approx$}}{#1}}
+\newcommand{\projwidetilde}[1]{\overset{\mbox{}\scalebox{2}[0.7]{$\approx$}}{#1}}
+
+% Vector bundles and module bundles
+\newcommand{\V}{\operatorname{\mathbb V}}
+\newcommand{\M}{\operatorname{\mathbb M}}
+
+% Homogeneous operators for graded schemes
+\newcommand{\hM}{\operatorname{\mathbf h \mathbb M}}
+\newcommand{\hV}{\operatorname{\mathbf h \hspace{-0.2ex} \mathbb V}}
+\newcommand{\hP}{\operatorname{\mathbf h \mathbb P}}
+\newcommand{\hA}{\operatorname{\mathbf h \mathbb A}}
+
+% Projective spaces, Grassmannians, blowups
+\renewcommand{\P}{\mathbb P}
+\newcommand{\Gr}{\mathbb{G}}
+\newcommand{\PGras}[2]{\mathbb G_{#1}(#2)} % Projective Grassmannian
+\newcommand{\pspace}[2]{\mathbb P^{#1}(#2)}
+\newcommand{\blowup}[2]{\mathrm{Bl}_{#1}(#2)}
+
+% Graded hom operators
+\newcommand{\Homk}[4]{\mathrm{Hom}_{#1}^{#2}(#3,#4)}
+\newcommand{\HOMk}[4]{\HH \!\!\mathit{om}_{#1}^{#2}(#3,#4)}
+
+% Spectrum (absolute/relative/max)
+\newcommand{\spec}[1]{\operatorname{\mathrm{Spec}}\left(#1 \right)}  %Affine Spec
+\newcommand{\Spec}[2]{\operatorname{\mathbf{Spec}}_{#1}\!\left(#2 \right)}  %Relative Spec
+\newcommand{\maxspec}[1]{\mathrm{MaxSpec} \left( #1 \right)}
+
+% Homogeneous spectrum (absolute/relative/max)
+\newcommand{\Hspec}[1]{\mathrm{hSpec}\left(#1\right)}
+\newcommand{\HSpec}[2]{\mathbf{hSpec}_{#1}\!\left(#2 \right)}
+\newcommand{\Hmaxspec}[1]{\mathrm{hMaxSpec}(#1)}
+
+% Coherent & quasi-coherent sheaves
+\newcommand{\coh}[1]{\mathfrak{Coh} \left( #1 \right)}
+\newcommand{\qco}[1]{\mathfrak{Qco} \left( #1 \right)}
+
+% Codimension
+\newcommand{\codim}[2]{\mathrm{codim}(#1,#2)}
+
+% Proj
+\newcommand{\proj}[1]{\mathrm{Proj}\! \left( #1 \right)}
+\newcommand{\Proj}[2]{\mathbf{Proj}_{#1}\!\left(#2 \right)}
+\newcommand{\Iproj}[1]{\mathrm{iProj}\! \left( #1 \right)}
+\newcommand{\IProj}[1]{\mathrm i\mathbf{Proj}\! \left( #1 \right)}
+\newcommand{\Hproj}[1]{\mathrm{hProj}\! \left( #1 \right)}
+\newcommand{\HProj}[2]{\mathbf{hProj}_{#1}\!\left(#2 \right)}
+
+% Distinguished open sets (DISTinguished OPens -> distop)
+\newcommand{\distop}[1]{\mathcal D \!\left(#1\right)}
+\newcommand{\distopX}[2]{\mathcal D_{#1}\!\left(#2\right)}
+\newcommand{\distopl}[1]{\mathcal D_+ \!\left(#1\right)}
+\newcommand{\distopi}[1]{\mathcal D_{\mathrm i} \!\left(#1\right)}
+\newcommand{\distopn}[1]{\mathcal D_{\neq} \!\left(#1\right)}
+\newcommand{\distoph}[1]{\mathcal D_{\mathrm h} \!\left(#1\right)}
+
+% Symmetric algebra sheaf functors
+\newcommand{\Sym}[2]{\mathit{Sym}^{#1}(#2)}
+\newcommand{\SYM}[2]{\mathit{Sym}_{#1}(#2)}
+\newcommand{\SYMM}{\mathit{Sym}}
+
+% Functors that create bundles out of sheaves
+\newcommand{\VB}{\mathbf{VB}} % Vector bundles
+\newcommand{\VBX}[1]{\mathbf{VB}(#1)}
+\newcommand{\GrVB}{\mathbf{GrVB}} % Graded vector bundles
+\newcommand{\GrVBX}[1]{\mathbf{GrVB}(#1)}
+\newcommand{\PB}{\mathbf{PB}} % Projective bundles
+\newcommand{\PBX}[1]{\mathbf{PB}(#1)}
+\newcommand{\ModB}{\mathbf{ModB}} % Module bundles
+\newcommand{\ModBX}[1]{\mathbf{ModB}(#1)}
+\newcommand{\GrModB}{\mathbf{GrModB}} % Graded module bundles
+\newcommand{\GrModBX}[1]{\mathbf{GrModB}(#1)}
+
+% Analytification functor
+\newcommand{\an}{\mathrm{an}}
+
+% Picard group
+\newcommand{\pic}[1]{\mathrm{Pic}\! \left( #1  \right)}
+
+% Divisor operators
+\newcommand{\class}[1]{\mathrm{Cl} \! \left(#1 \right)} % Divisor class groups
+\newcommand{\Div}[1]{\mathrm{div}\! \left( #1 \right)} % Divisor of a rational function
+\newcommand{\prDiv}[1]{\mathrm{div}\! \left[ #1 \right]}
+\newcommand{\WDIV}[1]{\mathrm{Div}_W\! \left( #1 \right)} % Weil divisor
+\newcommand{\PDIV}[1]{\mathrm{PDiv}_W\! \left( #1 \right)} 
+\newcommand{\WCl}[1]{\mathrm{Cl}_W\! \left( #1 \right)} % Weil class group
+\newcommand{\CaDIV}[1]{\mathrm{Div}_{\mathrm{Ca}}\! \left( #1 \right)} 
+\newcommand{\PCaDIV}[1]{\mathrm{PDiv}_{\mathrm{Ca}}\! \left( #1 \right)}
+\newcommand{\CaCl}[1]{\mathrm{CaCl} \left( #1 \right)} % Cartier class group
+
+% Graded stuff
+\newcommand{\GrRMod}[1]{#1\text-\mathbf{GrMod}}
+\newcommand{\GrMod}{\mathbf{GrMod}}
+\newcommand{\GrRAlg}[1]{#1\text-\mathbf{GrAlg}}
+\newcommand{\GrAlg}{\mathbf{GrAlg}}
+\newcommand{\GR}{\mathrm{Gr}}
+\newcommand{\hRMod}[1]{#1\text-\mathbf{hMod}}
+\newcommand{\hMod}{\mathbf{hMod}}
+\newcommand{\hAlg}{\mathbf{hAlg}}
+\newcommand{\hRAlg}[1]{#1\text-\mathbf{hAlg}}
+\newcommand{\h}{\mathrm h} % homogeneization
+
+% Hom for sheaves
+\newcommand{\HOM}[3]{\HH \!\!\mathit{om}_{#1}(#2,#3)}
+
+% Chain spectra 
+% (chains of irreducible subsets in a topological space,
+% like that of the underlying space of an affine scheme)
+\newcommand{\chsp}[1]{\mathrm{ChSp} \left(#1 \right)}
+\newcommand{\chspec}[1]{\mathrm{ChSpec} \left(#1 \right)}
+
+% Unclassified (yet)
+\newcommand{\A}{\operatorname{\mathbb A}}
+\newcommand{\zeros}[1]{\mathcal Z \! \left( #1 \right)}
+\newcommand{\zerosp}[1]{\mathcal Z_+ \! \left( #1 \right)}
+\newcommand{\zerosi}[1]{\mathcal Z_{\mathrm i} \! \left( #1 \right)}
+\newcommand{\zerosh}[1]{\mathcal Z_{\mathrm h} \! \left( #1 \right)}
+\newcommand{\zerosn}[1]{\mathcal Z_{\neq} \! \left( #1 \right)}
+\newcommand{\ideal}[1]{\mathcal I \! \left( #1 \right)}
+\newcommand{\idealh}[1]{\mathcal I_{\mathrm h} \!\left( #1 \right)}
+\newcommand{\idealn}[1]{\mathcal I_{\neq} \!\left( #1 \right)}
+\newcommand{\idealp}[1]{\mathcal I_+ \!\left( #1 \right)}
+\newcommand{\Ab}{\operatorname{\mathbf{Ab}}}
+\newcommand{\Ring}{\mathbf{Ring}}
+\newcommand{\Ringed}{\mathbf{RngSp}}
+\newcommand{\RingedMod}{\mathbf{RngSp}\text-\Mod}
+\newcommand{\RingedALG}{\mathbf{RngSp}\text-\ALG}
+\newcommand{\RingedK}[1]{\mathbf{RngSp}(#1)}
+\newcommand{\GrRinged}{\mathbf{GrRngSp}}
+\newcommand{\GrLRinged}{\mathbf{GrLRngSp}}
+\newcommand{\GrRingedMod}{\mathbf{GrRngSp}\text-\Mod}
+\newcommand{\GrLRingedMod}{\mathbf{GrLRngSp}\text-\Mod}
+\newcommand{\GrLRingedMOD}[1]{\mathbf{GrLRngSp}\text-\Mod(#1)}
+\newcommand{\GrRingedALG}{\mathbf{GrRngSp}\text-\ALG}
+\newcommand{\GrLRingedALG}{\mathbf{GrLRngSp}\text-\ALG}
+\newcommand{\hRinged}{\mathbf{hRngSp}}
+\newcommand{\hLRinged}{\mathbf{hLRngSp}}
+\newcommand{\hRingedMod}{\mathbf{hRngSp}\text-\Mod}
+\newcommand{\hLRingedMod}{\mathbf{hLRngSp}\text-\Mod}
+\newcommand{\hRingedALG}{\mathbf{hRngSp}\text-\ALG}
+\newcommand{\hLRingedALG}{\mathbf{hLRngSp}\text-\ALG}
+\newcommand{\LRinged}{\mathbf{LRngSp}}
+\newcommand{\LRingedMod}{\mathbf{LRngSp}\text-\Mod}
+\newcommand{\LRingedMOD}[1]{\mathbf{LRngSp}\text-\Mod(#1)}
+\newcommand{\LRingedALG}{\mathbf{LRngSp}\text-\ALG}
+\newcommand{\LRingedK}[1]{\mathbf{LRngSp}(#1)}
+\newcommand{\SCH}{\mathbf{Sch}}
+\newcommand{\Sch}[1]{\mathbf{Sch}_{#1}}
+\newcommand{\hSCH}{\mathbf{hSch}}
+\newcommand{\hSch}[1]{\mathbf{hSch}_{#1}}
+\newcommand{\GrSCH}{\mathbf{GrSch}}
+\newcommand{\GrSch}[1]{\mathbf{GrSch}_{#1}}
+\newcommand{\SchMod}{\mathbf{SchMod}}
+\newcommand{\hSchMod}{\mathbf{hSchMod}}
+\newcommand{\GrSchMOD}{\mathbf{GrSchMod}}
+\newcommand{\SchAlg}{\mathbf{SchAlg}}
+\newcommand{\hSchAlg}{\mathbf{hSchAlg}}
+\newcommand{\QCO}{\mathfrak{Qco}}
+\newcommand{\Qco}[1]{\mathfrak{Qco}(#1)}
+\newcommand{\QcoMod}[1]{\mathfrak{QcoMod}(#1)}
+\newcommand{\COH}{\mathfrak{Coh}}
+\newcommand{\Coh}[1]{\mathfrak{Coh}(#1)}
+\newcommand{\QCOALG}{\mathfrak{QcoAlg}}
+\newcommand{\QcoAlg}[1]{\mathfrak{QcoAlg}(#1)}
+\newcommand{\COHALG}{\mathfrak{CohAlg}}
+\newcommand{\CohAlg}[1]{\mathfrak{CohAlg}(#1)}
+\newcommand{\GrQCO}{\mathbf{Gr}\mathfrak{Qco}}
+\newcommand{\GrQco}[1]{\mathbf{Gr}\mathfrak{Qco}(#1)}
+\newcommand{\GrQcoMod}[1]{\mathbf{Gr}\mathfrak{QcoMod}(#1)}
+\newcommand{\GrCOH}{\mathbf{Gr}\mathfrak{Coh}}
+\newcommand{\GrCoh}[1]{\mathbf{Gr}\mathfrak{Coh}(#1)}
+\newcommand{\GrQCOALG}{\mathbf{Gr}\mathfrak{QcoAlg}}
+\newcommand{\GrQcoAlg}[1]{\mathbf{Gr}\mathfrak{QcoAlg}(#1)}
+\newcommand{\GrCOHALG}{\mathbf{Gr}\mathfrak{CohAlg}}
+\newcommand{\GrCohAlg}[1]{\mathbf{Gr}\mathfrak{CohAlg}(#1)}
+\newcommand{\FltSch}{\mathbf{FltSch}}
+\newcommand{\FltSchMod}{\mathbf{FltSchMod}}
+\newcommand{\comma}[2]{\left( #1 \downarrow #2 \right)}
+\renewcommand{\AA}{\mathscr A}
+\newcommand{\BB}{\mathscr B}
+\newcommand{\CC}{\mathscr C}
+\newcommand{\DD}{\mathscr D}
+\newcommand{\EE}{\mathscr E}
+\newcommand{\FF}{\mathscr F}
+\newcommand{\GG}{\mathscr G}
+\newcommand{\HH}{\mathscr H}
+\newcommand{\II}{\mathscr I}
+\newcommand{\JJ}{\mathscr J}
+\newcommand{\KK}{\mathscr K}
+\newcommand{\LL}{\mathscr L}
+\newcommand{\MM}{\mathscr M}
+\newcommand{\NN}{\mathscr N}
+\newcommand{\OO}{\mathscr O}
+\newcommand{\PP}{\mathscr P}
+\newcommand{\res}[2]{\mathrm{res}_{#1,#2}}
+\newcommand{\Nn}{\mathcal N}
+\newcommand{\opp}{\mathrm{opp}}
+\newcommand{\Top}{\mathbf{Top}}
+\newcommand{\REL}{\mathbf{Rel}}
+\newcommand{\SET}{\mathbf{Set}}
+\newcommand{\ALG}{\mathbf{Alg}}
+\newcommand{\ALGX}[2]{\mathbf{Alg}_{#1}(#2)}
+\newcommand{\Alg}[1]{#1\text-\mathbf{Alg}}
+\newcommand{\RAlg}[1]{#1\text-\mathbf{RAlg}}
+\newcommand{\LRAlg}[1]{#1\text-\mathbf{LRAlg}}
+\newcommand{\LALGX}[2]{\mathbf{LAlg}_{#1}(#2)}
+\newcommand{\Mod}{\mathbf{Mod}}
+\newcommand{\RMod}[1]{#1\text-\mathbf{Mod}}
+\newcommand{\ModR}[1]{\mathbf{Mod}\text-#1}
+\newcommand{\ModX}[2]{\mathbf{Mod}_{#1}(#2)}
+\newcommand{\RModS}[2]{#1\text-\mathbf{Mod}\text-#2}
+\newcommand{\CRing}{\mathbf{CRing}}
+\newcommand{\hCRing}{\mathbf{hCRing}}
+\newcommand{\GrCRing}{\mathbf{GrCRing}}
+\newcommand{\Loc}{\mathbf{Loc}}
+\newcommand{\LOC}{\mathrm L}
+\newcommand{\PreSh}[2]{\mathbf{PSh}_{#1}(#2)}
+\newcommand{\Sh}[2]{\mathbf{Sh}_{#1}(#2)}
+\newcommand{\etale}[1]{\mathrm E(#1)}
+\newcommand{\PASet}[1]{\mathbf{PASet}(#1)}
+\newcommand{\ASet}[1]{\mathbf{ASet}(#1)}
+\newcommand{\Var}[1]{\mathbf{Var}(#1)}
+\newcommand{\PVar}[1]{\mathbf{PVar}(#1)}
+\newcommand{\Rat}[1]{\mathbf{Rat}(#1)}
+\newcommand{\PRat}[1]{\mathbf{PRat}(#1)}
+\newcommand{\pretimes}{\widetilde{\otimes}}
+\newcommand{\tensp}[2]{\mathit{T}^{#1}(#2)}
+\newcommand{\symp}[2]{\mathit{Sym}^{#1}(#2)}
+\newcommand{\extp}[2]{\eev^{#1}(#2)}
+\newcommand{\tensa}[1]{\mathcal{T}(#1)}
+\newcommand{\syma}[1]{\mathit{Sym}(#1)}
+\newcommand{\exta}[1]{\eev(#1)}
+\newcommand{\varsch}[1]{\mathbb S(#1)}
+\newcommand{\SP}[1]{\mathrm{sp}(#1)}
+\newcommand{\gen}[2]{\mathrm{Gen}_{#1}(#2)}
+\newcommand{\VectB}[2]{\operatorname{\mathbb V}_{#1}(#2)}
+\newcommand{\vectB}[1]{\operatorname{\mathbb V}(#1)}
+\newcommand{\grz}{\rightsquigarrow}
+
+% Set theory
+\newcommand{\pow}[1]{\operatorname{\mathcal P}(#1)}

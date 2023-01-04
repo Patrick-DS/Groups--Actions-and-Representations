@@ -1,0 +1,142 @@
+\section{Operations on families of relations}
+
+Now that we have laid out most of the relevant definitions concerning binary relations alone, we can start defining constructions built on them. 
+\\
+
+\begin{definition}
+	Let $\{A_i\}_{i \in I}$ be a family of sets.
+	\\
+	
+	\begin{itemize}
+		\item[(i)] The \textbf{union} of the $A_i$ is the set denoted by $\bigcup_{i \in I} A_i$ and is characterized by the following property~: we have $a \in \bigcup_{i \in I} A_i$ if and only if there exists $i \in I$ with $a \in A_i$. When we are only concerned with two sets $A$ and $B$, we denote their union with $A \cup B$~; if we have finitely many sets $A_1,\cdots,A_n$, we can write $\bigcup_{i=1}^n A_i$ as a shorthand for $\bigcup_{i \in \{1,\cdots,n\}} A_i$. 
+		\\
+
+		\item[(ii)] The \textbf{intersection} of the $A_i$ is a subset of $\bigcup_{i \in I} A_i$ denoted by $\bigcap_{i \in I} A_i$ and is characterized by the following property~: we have $a \in \bigcap_{i \in I} A_i$ if and only for all $i \in I$, we have $a \in A_i$. When we are only concerned with two sets $A$ and $B$, we denote their intersection with $A \cap B$~; if we have finitely many sets $A_1,\cdots,A_n$, we can write $\bigcap_{i=1}^n A_i$ as a shorthand for $\bigcap_{i \in \{1,\cdots,n\}} A_i$. 
+		\\
+
+		\item[(iii)] If $B \subseteq A$, the \textbf{complement} of $B$ in $A$ is denoted by $A \setminus B$ or $B^{\complement}$ (if $A$ is understood as being the parent set) and is defined as
+		\[
+			B^{\complement} \defn \{ a \in A \, \mid \, a \notin B \}.
+		\]
+	\end{itemize}
+\end{definition}
+
+\begin{remark}
+	It is not a given that the union and intersection of sets exist for every family of sets. In fact, one needs to rely on axioms of Zermelo-Fraenkel's set theory to be able to assume their existence. We will therefore dismiss the discussion of their existence and simply assume it, as this is not in the scope of this document.
+\end{remark}
+
+\begin{remark}
+	In some documents (especially those that study set theory), you may see the notations $\bigcup I$ and $\bigcap I$. These are just synonyms for $\bigcup_{i \in I} i$ and $\bigcap_{i \in I} i$, respectively. For set theorists, sets contain sets, so $i$ is a perfectly valid set and our notation is redundant if the only interest is study sets for themselves. But it is not practical for us, we need something a bit more verbose to express our sets~; so we'll stick to the latter notation.
+\end{remark}
+
+\begin{definition} \label{restriction-of-relations}
+	Let $R : A \to B$ be a relation, and $C \subseteq A$, $D \subseteq B$ be two subsets. The \textbf{restriction} of $R$ to $C$ and $D$ is the relation $R|_C^D \subseteq C \times D$ given by 
+	\[
+		R|_C^D \defn R \cap (C \times D).	
+	\]
+	If $C = A$, we write $R|^D$ for the restriction to $D$ alone~; similarly, if $D=B$, we write $R|_C$ for the restriction to $C$ alone. 
+\end{definition}
+
+\begin{proposition}
+	Let $R : A \to B$ be a relation, and $C \subseteq A$, $D \subseteq B$ be two subsets. Then
+	\[
+		(R|_C^D)^{\top} = (R^{\top})|_D^C.	
+	\]
+\end{proposition}
+
+\begin{proof}
+	We have 
+	\begin{gather*}
+		\begin{aligned}
+			(R|_C^D)^{\top} 
+			& = \{ (b,a) \in B \times A \, \mid \, R|_C^D(a,b) \}	\\
+			& = \{ (b,a) \in B \times A \, \mid \, R(a,b) \quad \text{and} \quad (a,b) \in C \times D \}	\\
+			& = \{ (b,a) \in B \times A \, \mid \, R^{\top}(b,a) \quad \text{and} \quad (b,a) \in D \times C \}	\\
+			& = R^{\top} \cap (D \times C)	\\
+			& = (R^{\top})|_D^C.
+		\end{aligned}
+	\end{gather*}
+\end{proof}
+
+\begin{theorem} \label{de-morgan-laws} % De Morgan laws
+	Let $A$ be a set and $\{A_i\}_{i \in I}$ be a family of subsets of $A$. Then
+	\[
+		\left( \bigcup_{i \in I} A_i \right)^{\complement} = \bigcap_{i \in I} A_i^{\complement} \qquad \left( \bigcap_{i \in I} A_i \right)^{\complement} = \bigcup_{i \in I} A_i^{\complement}
+	\]
+\end{theorem}
+
+\begin{proof}
+	The first equality says that $x \in A$ is not in any of the $A_i$'s if and only if for all $i \in I$, $x \in A_i^{\complement}$. The second equality says that $x \in A$ not being in all of the $A_i$'s means that $x$ is not in $A_i$ for some $i$. There is not much more to say.
+\end{proof}
+
+\begin{definition} % Move to homogeneous binary relations
+	Let $A$ be a set and $\{A_i\}_{i \in I}$ be a family of subsets of $A$. We say that the family 
+	\\
+	\begin{itemize}
+		\item[(i)] is a \textbf{cover} of $A$ if $\bigcup_{i \in I} A_i = A$
+		\\
+
+		\item[(ii)] is \textbf{pairwise disjoint} if for all $i,j \in I$ with $i \neq j$, we have $A_i \cap A_j = \varnothing$
+		\\
+
+		\item[(iii)] \textbf{partitions} $A$ if it is pairwise disjoint and is a cover of $A$.
+		\\
+
+	\end{itemize}
+\end{definition}
+
+\begin{proposition} \label{glueing-relations}
+	Let $A,B$ be sets $\{A_i\}_{i \in I}$ be a cover of $A$ and $\{B_j\}_{j \in J}$ be a cover of $B$. Suppose that we have two functions $i : K \to I$ and $j : K \to J$ and a family $\{R_k : A_{i(k)} \to B_{j(k)}\}_{k \in K}$ of relations. Furthermore, suppose that for all $k_1,k_2 \in K$, we have the following property~: letting $A_{k_1,k_2} \defn A_{i(k_1)} \cap A_{i(k_2)}$ and similarly $B_{k_1,k_2} \defn B_{j(k_1)} \cap B_{j(k_2)}$, 
+	\[
+		R_{k_1}|_{A_{k_1,k_2}}^{B_{k_1,k_2}} = R_{k_2}|_{A_{k_1,k_2}}^{B_{k_1,k_2}}.
+	\]
+	% \[
+	% 	\forall a \in A_{i(k_1)} \cap A_{i(k_2)}, \quad \forall b \in B_{j(k_1)} \cap B_{j(k_2)}, \quad R_{k_1}(a,b) \iff R_{k_2}(a,b).
+	% \]
+	Then there exists a unique relation $R : A \to B$ with the property that for all $i \in I$, $j \in J$, $a \in A_i$ and $b \in B_j$, the relation $R(a,b)$ holds if and only if there exists $k \in K$ with $i(k) = i$, $j(k) = j$ and $R_k(a,b)$ holds. 
+	\\
+
+	Furthermore,
+	\begin{itemize}
+		\item[(i)] If all the $R_k$ are univalent and $B_j = B$ for all $j \in J$, then $R$ is univalent.
+		\item[(ii)] If all the $R_k$ are total and $\{A_{i(k)}\}_{k \in K}$ is also a cover for $A$, then $R$ is total.
+	\end{itemize}
+\end{proposition}
+
+\begin{proof}
+	First, let us re-phrase the property of $R_{k_1}$ and $R_{k_2}$ for $k_1,k_2 \in K$ in terms of elements of $A$ and $B$~:
+	\[
+		\forall a \in A_{i(k_1)} \cap A_{i(k_2)}, \quad \forall b \in B_{j(k_1)} \cap B_{j(k_2)}, \quad R_{k_1}(a,b) \iff R_{k_2}(a,b).
+	\]
+	We can interpret $R_k \subseteq A_{i(k)} \times B_{j(k)} \subseteq A \times B$, so that $\{R_k\}_{k \in K}$ can be seen as a family of subsets of $A \times B$. Set
+	\[
+		R \defn \bigcup_{k \in K} R_k.	
+	\]
+	Let $k \in K$, $a \in A_{i(k)}$ and $b \in B_{j(k)}$. Suppose we have $R_k(a,b)$. Since $R_k \subseteq R$, we have $R(a,b)$. Conversely, suppose $R(a,b)$. Then for some $k' \in K$ with $a \in A_{i(k')}$ and $b \in B_{j(k')}$, we have $R_{k'}(a,b)$. But then $a \in A_{i(k)} \cap A_{i(k')}$ and $b \in B_{j(k)} \cap B_{j(k')}$, so $R_k(a,b)$ also holds. 
+	\\
+
+	To show unicity, suppose $R'$ is another such relation. Then by the property required, we would have $R_k \subseteq R'$ for all $k \in K$, and therefore $R \subseteq R'$. Now let $a \in A$ and $b \in B$ such that $R'(a,b)$. Since $A$ is covered by $\{A_i\}_{i \in I}$ and $B$ is covered by $\{B_j\}_{j \in J}$, there exist $i \in I$ and $j \in J$ such that $a \in A_i$ and $b \in A_j$. Therefore, there exists $k \in K$ with $R_k(a,b)$, thus $R(a,b)$ also holds. This proves $R' \subseteq R$.
+	\\
+
+	\begin{itemize}
+		\item[(i)] Suppose every $R_k$ is univalent, and let $a \in A$, $b_1,b_2 \in B$ such that $R(a,b_1)$ and $R(a,b_2)$. For $\ell=1,2$, the fact that $R(a,b_{\ell})$ holds means that $R_{k_{\ell}}(a,b_{\ell})$ holds for some $k_{\ell} \in K$, which implies $a \in A_{k_1,k_2}$. Since $B_{k_1,k_2} = B$ by assumption, we deduce that $R_{k_1}(a,b_1) = R_{k_2}(a,b_1)$. Since $R_{k_2}(a,b_2)$ as well and $R_{k_2}$ is univalent, we get $b_1 = b_2$, which means $R$ is univalent. 
+		\\
+
+		\item[(ii)] Let $a \in A$, so that $a \in A_{i(k)}$ for some $k \in K$. Since the relation $R_k : A_{i(k)} \to B_{j(k)}$ is total, there exists $b \in B_{j(k)}$ with $R_k(a,b)$. We deduce that $R(a,b)$, therefore $R$ is total.
+ 	\end{itemize}
+\end{proof}
+
+\begin{corollary} \label{glueing-functions}
+	Let $A,B$ be sets and $\{A_i\}_{i \in I}$ be a cover for $A$. Suppose we are given an index set $K$, a function $i : K \to I$ and a family of functions $\{f_k : A_{i(k)} \to B \}_{k \in K}$ with the following properties~:
+	\\
+
+	\begin{itemize}
+		\item[(i)] The family $\{A_{i(k)}\}_{k \in K}$ is a cover for $A$ \\
+		\item[(ii)] On the intersections $A_{k_1,k_2}$, we have $f_{k_1}|_{A_{k_1,k_2}} = f_{k_2}|_{A_{k_1,k_2}}$. \\
+	\end{itemize}
+	Then there exists a unique function $f : A \to B$ with the property that $f|_{A_{i(k)}} = f_k$ for all $k \in K$.
+\end{corollary}
+
+\begin{proof}
+	By Proposition \autoref{glueing-relations}, the relation $f : A \to B$ is uniquely defined with the property that $f(a) = b$ if and only if there exists some $k \in K$ such that $a \in A_{i(k)}$ and $f_k(a) = b$. It is also a function by hypothesis since all the $f_k$ are functions and the requirements of Proposition \autoref{glueing-relations} (i) and (ii) are also assumed here. Suppose that $k' \in K$ also satisfies $a \in A_{i(k')}$. Then $a \in A_{k,k'}$, so $f_k(a) = f_{k'}(a)$. Therefore, setting $f(a) = f_k(a)$ whenever $a \in A_{i(k)}$ is unambiguous, and $f|_{A_{i(k)}} = f_k$ follows.
+\end{proof}
