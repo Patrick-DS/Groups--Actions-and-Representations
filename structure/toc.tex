@@ -1,0 +1,115 @@
+%---------------------------------------------------------------------------------------
+%	MAIN TABLE OF CONTENTS
+%---------------------------------------------------------------------------------------
+
+% Required for manipulating the table of contents
+\usepackage{titletoc} 
+
+\contentsmargin{0cm} % Removes the default margin
+
+% Part text styling
+\titlecontents{part}[0cm]
+{\addvspace{20pt}\centering\large\bfseries}
+{}
+{}
+{}
+
+% Chapter text styling
+\titlecontents{chapter}[1.25cm] % Indentation
+% Spacing and font options for chapters
+{
+    \addvspace{12pt}
+    \large
+    \sffamily
+    \bfseries
+} 
+% Chapter number
+{
+    \color{ocre!60}
+    \contentslabel[
+        \Large
+        \thecontentslabel
+    ]{1.25cm}
+    \color{ocre}
+} 
+{\color{ocre}}  
+% Page number
+{
+    \color{ocre!60}\normalsize\;\titlerule*[.5pc]{.}\;\thecontentspage
+} 
+
+% Section text styling
+% Indentation
+\titlecontents{section}[1.25cm] 
+% Spacing and font options for sections
+{
+    \addvspace{3pt}
+    \sffamily
+    \bfseries
+}
+% Section number
+{
+    \contentslabel[\thecontentslabel]{1.25cm}
+}
+{}
+% Page number
+{
+    \hfill
+    \color{black}
+    \thecontentspage
+}
+[]
+
+% Subsection text styling
+% Indentation
+\titlecontents{subsection}[1.25cm]
+% Spacing and font options for subsections
+{
+    \addvspace{1pt}
+    \sffamily
+    \small
+}
+% Subsection number
+{
+    \contentslabel[\thecontentslabel]{1.25cm}
+}
+{}
+% Page number
+{
+    \ \titlerule*[.5pc]{.}\;\thecontentspage
+}
+[]
+
+% List of figures
+\titlecontents{figure}[0em]
+{
+    \addvspace{-5pt}
+    \sffamily
+}
+{
+    \thecontentslabel
+    \hspace*{1em}
+}
+{}
+{
+    \ \titlerule*[.5pc]{.}\;\thecontentspage
+}
+[]
+
+% List of tables
+\titlecontents{table}[0em]
+{
+    \addvspace{-5pt}
+    \sffamily
+}
+{
+    \thecontentslabel
+    \hspace*{1em}
+}
+{}
+{
+    \ \titlerule*[.5pc]{.}\;\thecontentspage
+}
+[]
+
+%---------------------------------------------------------------------------------------
