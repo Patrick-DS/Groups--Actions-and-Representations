@@ -1,0 +1,111 @@
+\section{Homogeneous binary relations}
+
+\begin{definition}
+	Let $\sim \, : A \to B$ be a binary relation. 
+    \begin{itemize}
+        \item[(i)] We say that $\sim$ is \textbf{homogeneous} if $A = B$. If $\sim$ is homogeneous, we call the relation
+            \begin{itemize}
+                \item[$\bullet$] \textbf{reflexive} if for all $a \in A$, we have $a \sim a$
+                \item[$\bullet$] \textbf{irreflexive} if for all $a \in A$, we have $a \not\sim a$
+                \item[$\bullet$] \textbf{symmetric} if for all $a_1,a_2 \in A$, we have $a_1 \sim a_2$ if and only if $a_2 \sim a_1$, i.e. $(\sim)^{\top} = \,\, \sim$
+                \item[$\bullet$] \textbf{antisymmetric} if for all $a_1,a_2 \in A$, $a_1 \sim a_2$ and $a_2 \sim a_1$ implies $a_1 = a_2$
+                \item[$\bullet$] \textbf{asymmetric} if for all $a_1,a_2 \in A$, $a_1 \sim a_2$ implies $a_2 \not\sim a_1$ (i.e. if $\sim$ is irreflexive and antisymmetric)
+                \item[$\bullet$] \textbf{transitive} if for all $a_1,a_2,a_3 \in A$, $a_1 \sim a_2$ and $a_2 \sim a_3$ implies $a_1 \sim a_3$.
+                \\
+                \item[$\bullet$] \textbf{strongly connected} if for all $a_1,a_2 \in A$, we have $a_1 \sim a_2$ or $a_2 \sim a_1$ (in particular, it is reflexive).
+                \\
+            \end{itemize}
+
+        \item[(ii)] A homogeneous binary relation which is reflexive, symmetric and transitive is called an \textbf{equivalence relation}. Let $\sim$ denote an equivalence relation on the set $A$. For $x \in A$, the set
+        \[
+                [x]_{\sim} \defn \{ y \in A \, \mid \, x \sim y \}
+        \]
+        is called the \textbf{equivalence class} of $x$ in $A$ under $\sim$. For short, we may denote it simply by $[x]$ and call it the equivalence class of $x$.
+        \\
+        
+        \item[(iii)] A homogeneous binary relation which is transitive and antisymmetric is called a \textbf{partial order}. If it is also irreflexive (e.g. if it is asymmetric), we call it a \textbf{strict partial order}~; if it is reflexive, we call it a \textbf{non-strict partial order}. Partial orders are often denoted using the symbol $<$ (for strict ones) or $\le$ (for non-strict ones) unless mentioned otherwise. 
+        \\
+
+        The pair $(A,<)$ (or $(A, \le)$) is called a \textbf{partially ordered set} or a \textbf{poset} for short. If $\le$ is strongly connected, we call $\le$ a \textbf{total order} and the pair $(A,\le)$ is called a \textbf{linearly ordered set}.
+        \\
+
+        In a poset $(A,\le)$, two elements $a_1,a_2 \in A$ with $a_1 \le a_2$ or $a_2 \le a_1$ are called \textbf{comparable}~; if not, they are called \textbf{incomparable}. 
+        \\
+    \end{itemize}
+\end{definition}
+
+\begin{example} 
+    \quad \\
+    \begin{itemize}
+        \item[$\bullet$] For any set $A$, the identity $\id A$ is an example of a reflexive and symmetric homogeneous relation. Its complement $\id A^{\complement}$ is an example of an irreflexive and symmetric homogeneous relation.
+        \\
+
+        \item[$\bullet$] (Partial orders) Let $A = \{1,2,\cdots,n\}$. The relation $<$ (i.e. $i < j$ if $i$ is strictly smaller than $j$) is asymmetric, thus a strict partial order. The relation $\le$ (i.e. $i \le j$ if $i < j$ or $i = j$) is a total order. The relation $a \mid b$ if $a$ divides $b$ is also antisymmetric, but unlike $\le$, it does not define a total order~; there are integers $1 \le i,j \le n$ satisfying $a \nmid b$ and $b \nmid a$ (e.g. coprime ones).
+        \\
+
+        A typical example of a (non-strict) partial order is that given a set $X$, the set $\pow X$ of all subsets of $A$ is partially ordered by inclusion, i.e. for $A,B \subseteq X$, the relation $\subseteq : \pow X \times \pow X$ is given by $A \subseteq B$ if every element of $A$ is also in $B$. This is only a total order if $X$ is empty or a singleton, because for example, disjoint subsets are incomparable. 
+        \\
+
+        \item[$\bullet$] (Simple graphs) Let $V$ be a set and $E : V \to V$ be an irreflexive homogeneous binary relation (so that $E \subseteq V \times V$). The pair $G \defn (V,E)$ is called a \textbf{simple graph}. The elements of $V$ are called \textbf{vertices} and the elements of $E$ called \textbf{edges}. If $E$ is assumed to be symmetric in the context, we call $G$ is a \textbf{undirected graph}~; if it is not assumed symmetric, it is called a \textbf{directed graph}. (The reason for assuming $E$ to be irreflexive is to remove the presence of self-loops.) 
+        \\
+    \end{itemize}
+\end{example}
+
+\begin{theorem}[Equivalence relations and partitions] \label{equivalence-relations-and-partitions}
+    Let $A$ be a set. To each equivalence relation corresponds a unique partition of $A$ that characterizes it~; the sets in the partition are of the form $[a]_{\sim}$ for $a \in A$. Conversely, given a partition $\{A_i\}_{i \in I}$ of $A$, the relation $a_1 \sim a_2$ if and only if $a_1,a_2 \in A_i$ for some $i$ is an equivalence relation, and the two constructions are inverse to each other.
+\end{theorem}
+
+\begin{proof}
+    Let $\mathrm{EqR}(A) \subseteq \Rel AA$ be the set of equivalence relations on $A$. For partitions, note that a partition $\{A_i\}_{i \in I}$ is a set whose elements are subsets of $A$, thus is an element of $\pow{\pow A}$. So we define $\mathrm{Part}(A) \subseteq \pow{\pow A}$ as the set of subsets of $A$ which define a partition of $A$. We wish to establish a bijection between $\mathrm{EqR}(A)$ and $\mathrm{Part}(A)$. 
+    \\
+
+    Let $\sim$ be an equivalence relation. We claim that the set
+    \[
+        \mathrm{Part}(\sim) \defn \{ [a]_{\sim} \, \mid \, a \in A \} \subseteq \pow{\pow A}
+    \]
+    is a partition of $A$. Indeed, pick $a_1,a_2 \in A$. If $a_1 \sim a_2$, then $[a_1]_{\sim} = [a_2]_{\sim}$~; if not, suppose $a \in [a_1]_{\sim} \cap [a_2]_{\sim}$. This would imply $a_1 \sim a$ and $a \sim a_2$, so by transitivity of $\sim$, we would have $a_1 \sim a_2$, a contradiction. Therefore $[a_1]_{\sim} \cap [a_2]_{\sim} = \varnothing$. This means that the sets of the form $[a]_{\sim}$ partition $A$ (we will have duplicates in the definition when equivalence classes are not singletons, but the \textbf{set} $\mathrm{Part}(\sim)$ does not contain any duplicates). 
+    \\
+
+    Conversely, let $P = \{A_i\}_{i \in I}$ be a partition~; we have to show that $\mathrm{Eq}(P) \defn \,\, \sim$ (defined as in the statement of the theorem) is reflexive, symmetric and transitive. The relation $\sim$ is reflexive since the partition covers $A$. It is symmetric by construction. For transitivity, if $a_1,a_2 \in A_i$ and $a_2,a_3 \in A_j$, since two distinct subsets defining the partition are disjoint, it implies $i=j$, thus $a_1,a_3 \in A_i$ and $a_1 \sim a_3$. 
+    \\
+
+    We now have two functions, $\mathrm{Eq} : \mathrm{Part}(A) \to \mathrm{Eq}(A)$ and $\mathrm{Part} : \mathrm{Eq}(A) \to \mathrm{Part}(A)$, and we want to show that they are inverse to each other. 
+    \\
+
+    Let $P \defn \{A_i\}_{i \in I}$ be a partition of $A$ and $\sim \,\, \defn \mathrm{Eq}(P)$ be the corresponding equivalence relation. Pick $i \in I$ and $a \in A_i$. We have $a' \in A_i$ if and only if $a' \sim a$ by definition, e.g. if and only if $a' \in [a]_{\sim}$. It follows that $P = \mathrm{Part}(\mathrm{Eq}(P))$. 
+    \\
+
+    Conversely, let $\sim$ be an equivalence relation and $P \defn \mathrm{Part}(\sim) = \{A_i\}_{i \in I}$ be the corresponding partition. Let $a_1,a_2 \in A$ and pick $i \in I$ such that $a_1 \in A_i$. 
+\end{proof}
+
+\begin{definition}[Closures]
+    Let $R \in \Rel AA$ be a relation. In the following, we say that $R' \subseteq A \times A$ is the smallest relation satisfying a given property if and only if any other relation $R''$ satisfying that same property also satisfies $R' \subseteq R''$. 
+    \begin{itemize}
+        \item[(i)] The \textbf{reflexive closure} of $R$ is the smallest reflexive relation over $A$ containing $R$. 
+        \item[(ii)] The \textbf{symmetric closure} of $R$ is the smallest symmetric relation over $A$ containing $R$.
+        \item[(iii)] The \textbf{transitive closure} of $R$ is the smallest transitive relation over $A$ containing $R$.
+        \item[(iii)] The \textbf{equivalence closure} of $R$ is the smallest equivalence relation over $A$ containing $R$. 
+    \end{itemize}
+\end{definition}
+
+\begin{proposition} \label{characterization-of-reflexive-closure}
+    Let $R \in \Rel AA$. Then $R$ is reflexive if and only if $\id A \subseteq R$. It follows that the reflexive closure of $R$ is equal to $R \cup \id A$. 
+\end{proposition}
+
+\begin{proof}
+    $R$ is reflexive if and only if $R(a,a)$ for all $a \in A$, but since $a \in A$ implies $\id A(a,a)$, $R$ is reflexive if and only if $\id A(a,b)$ implies $R(a,b)$, i.e. $\id A \subseteq R$. 
+    \\
+
+    By the previous statement, if $R'$ is a reflexive relation, then $R \subseteq R'$ if and only if $R \cup \id A \subseteq R'$, so $R \cup \id A$ is the smallest reflexive relation containing $R$. 
+\end{proof}
+
+\begin{proposition} \label{characterization-of-symmetric-closure}
+    Let $R \in \Rel AA$. Then $R$ is symmetric if and only if $R^{\top} \subseteq R$, in which case $R^{\top} = R$. It follows that the symmetric closure of $R$ is equal to $R \cup R^{\top}$.
+\end{proposition}
+
+\begin{proof}
+    The relation $R$ is symmetric if and only if for all $a,b \in A$ with $R(a,b)$, we have $R(b,a)$, i.e. $R^{\top}(a,b)$. This gives $R^{\top} \subseteq R$, in which case $R = (R^{\top})^{\top} \subseteq R^{\top}$, explaining why $R = R^{\top}$. 
+    \\
+
+    If $S \in \Rel AA$ is a symmetric relation and $R \subseteq S$, then $R^{\top} \subseteq S^{\top} = S$, so $R \cup R^{\top} \subseteq S$. But since for two relations $R,R' \in \Rel AA$, we have $(R \cup R')^{\top} = R^{\top} \cup (R')^{\top}$, we deduce that $R \cup R^{\top}$ is symmetric. It follows that $R \cup R^{\top}$ is the symmetric closure of $R$. 
+\end{proof}
