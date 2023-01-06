@@ -74,11 +74,19 @@ Now that we have laid out most of the relevant definitions concerning binary rel
 		\item[(ii)] is \textbf{pairwise disjoint} if for all $i,j \in I$ with $i \neq j$, we have $A_i \cap A_j = \varnothing$
 		\\
 
-		\item[(iii)] \textbf{partitions} $A$ if it is pairwise disjoint and is a cover of $A$.
+		\item[(iii)] \textbf{partitions} $A$ if it is pairwise disjoint, is a cover of $A$ and the $A_i$ are non-empty.
 		\\
 
 	\end{itemize}
 \end{definition}
+
+\begin{remark} \label{why-partition-sets-are-non-empty}
+	It is possible to partition the empty set~; just take $I$ to be empty. The non-emptiness condition is added so that we don't end up with the "different" partitions $\{A_i\}_{i \in I}$ and $\{A_i\}_{i \in I} \cup \{\varnothing\}$. 
+\end{remark}
+
+\begin{remark} \label{partition-as-a-family-of-subsets}
+	Since partitions are families of distinct subsets of $A$, they are elements of $\pow{\pow A}$. So if $P \in \pow{\pow A}$ is a partition (e.g. $P \subseteq \pow A$), we can let $I = P$ and for $i \in I$, $A_i \defn i \subseteq A$, which means that we have a function $I \to \pow{\pow A}$ defining the family, which is just the inclusion map.
+\end{remark}
 
 \begin{proposition}[Glueing relations] \label{glueing-relations}
 	Let $A,B$ be sets $\{A_i\}_{i \in I}$ be a cover of $A$ and $\{B_j\}_{j \in J}$ be a cover of $B$. Suppose that we have two functions $i : K \to I$ and $j : K \to J$ and a family $\{R_k : A_{i(k)} \to B_{j(k)}\}_{k \in K}$ of relations. Furthermore, suppose that for all $k_1,k_2 \in K$, we have the following property~: letting $A_{k_1,k_2} \defn A_{i(k_1)} \cap A_{i(k_2)}$ and similarly $B_{k_1,k_2} \defn B_{j(k_1)} \cap B_{j(k_2)}$, 

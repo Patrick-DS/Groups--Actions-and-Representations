@@ -110,7 +110,7 @@
 		\item[$\bullet$] Let $A,B$ be sets. There are two functions $\pi_A : A \times B \to A$ and $\pi_B : A \times B \to B$ given by $(a,b) \mapsto a$ and $(a,b) \mapsto b$, respectively. These are called the \textbf{canonical projection maps}.
 		\\
 
-		\item[$\bullet$] Let $A$ be a set. The relation $\varnothing : \varnothing \to A$ is trivially univalent and total, and therefore is a function. However, it doesn't have any elements in its domain (by construction). In fact, $\Hom{\SET}{\varnothing}A$ is always a singleton because of this fact~; we call this unique function the \textbf{empty function}.
+		\item[$\bullet$] Let $A$ be a set and $B \subseteq A$ be a subset. The function $\iota : B \to A$ satisfying $\iota(b) \defn b$ is called the \textbf{inclusion map} and is trivially an injection. In particular, the relation $\varnothing : \varnothing \to A$ is a function. However, it doesn't have any elements in its domain (by construction). In fact, $\Hom{\SET}{\varnothing}A$ is always a singleton because of this fact~; we call this unique function the \textbf{empty function}.
 		\\
 
 		\item[$\bullet$] Let $A$ be a set and $B$ be a singleton. The relation $R : A \to B$ given by $R = A \times B$ is a surjective function. In fact, it is the unique relation from $A$ to $B$ which is a function because the only element of $B$ gives only one possible image to all the elements of $A$. From this, we also deduce that $\Rel AB = \{ C \times B \, | \, C \in \pow A \}$, and at the exception of the empty relation, any relation $R : A \to B$ is a surjective partial function. The empty relation is also a partial function (tautologically), but it is not surjective.
