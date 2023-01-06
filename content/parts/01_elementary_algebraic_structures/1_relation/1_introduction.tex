@@ -102,7 +102,7 @@ We'll take for granted a naive mathematical understanding of the notion of a set
 	By definition, $\coim R = \{ a \in A \, \mid \, \exists b \in B \st R(a,b) \}$. Since $R(a,b)$ if and only if $R'(a,b)$, we deduce that $R'$ is total.
 \end{proof}
 
-\begin{corollary}
+\begin{corollary} \label{restrict-partial-function-to-coimage-is-function}
 	Let $R : A \to B$ be a partial function. The relation $R' : \coim R \to B$, given for $(a,b) \in \coim R \times B$ by $R'(a,b)$ if and only if $R(a,b)$, is a function. 
 \end{corollary}
 
@@ -110,7 +110,7 @@ We'll take for granted a naive mathematical understanding of the notion of a set
 	We already know that $R'$ is total, so we have to show it is univalent, i.e. that for every $x \in \coim R$ and $y,z \in B$, $R'(x,y)$ and $R'(x,z)$ implies $y=z$. But this is true of $R$ and $\coim R \subseteq A$, and the relations hold for $R$ if and only if they hold for $R'$, so $R'$ is univalent. Since $R'$ is univalent and total, it is a function.
 \end{proof}
 
-\begin{lemma}
+\begin{lemma} \label{restricting-relation-to-image-is-surjective}
 	Let $R : A \to B$ be a binary relation. Consider the relation $R' : A \to \ima R$ given for $(a,b) \in A \times \ima R$ by $R'(a,b)$ if and only if $R(a,b)$. Then $R'$ is surjective.
 \end{lemma}
 
@@ -126,8 +126,8 @@ We'll take for granted a naive mathematical understanding of the notion of a set
 	We already know that $R'$ is surjective. Using a similar argument as previously, we see that $R'$ is injective because $R$ is injective. Therefore, $R$ is bijective.
 \end{proof}
 
-\begin{corollary}
-	Let $R : A \to B$ be an injective partial function. The relation $R' : \coim R \to \ima R$ given by $R'(a,b)$ if and only if $R(a,b)$ is a bijective function.
+\begin{corollary} \label{restricting-relation-to-image-and-coimage-is-a-surjective-function}
+	Let $R : A \to B$ be a partial function. The relation $R' : \coim R \to \ima R$ given by $R'(a,b)$ if and only if $R(a,b)$ is a surjection. In particular, if $R$ is injective, $R'$ is a bijection.
 \end{corollary}
 
 \begin{proof}

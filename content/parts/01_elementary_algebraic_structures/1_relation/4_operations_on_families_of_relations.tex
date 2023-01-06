@@ -53,7 +53,7 @@ Now that we have laid out most of the relevant definitions concerning binary rel
 	\end{gather*}
 \end{proof}
 
-\begin{theorem} \label{de-morgan-laws} % De Morgan laws
+\begin{theorem}[De Morgan laws] \label{de-morgan-laws} % De Morgan laws
 	Let $A$ be a set and $\{A_i\}_{i \in I}$ be a family of subsets of $A$. Then
 	\[
 		\left( \bigcup_{i \in I} A_i \right)^{\complement} = \bigcap_{i \in I} A_i^{\complement} \qquad \left( \bigcap_{i \in I} A_i \right)^{\complement} = \bigcup_{i \in I} A_i^{\complement}
@@ -80,7 +80,7 @@ Now that we have laid out most of the relevant definitions concerning binary rel
 	\end{itemize}
 \end{definition}
 
-\begin{proposition} \label{glueing-relations}
+\begin{proposition}[Glueing relations] \label{glueing-relations}
 	Let $A,B$ be sets $\{A_i\}_{i \in I}$ be a cover of $A$ and $\{B_j\}_{j \in J}$ be a cover of $B$. Suppose that we have two functions $i : K \to I$ and $j : K \to J$ and a family $\{R_k : A_{i(k)} \to B_{j(k)}\}_{k \in K}$ of relations. Furthermore, suppose that for all $k_1,k_2 \in K$, we have the following property~: letting $A_{k_1,k_2} \defn A_{i(k_1)} \cap A_{i(k_2)}$ and similarly $B_{k_1,k_2} \defn B_{j(k_1)} \cap B_{j(k_2)}$, 
 	\[
 		R_{k_1}|_{A_{k_1,k_2}}^{B_{k_1,k_2}} = R_{k_2}|_{A_{k_1,k_2}}^{B_{k_1,k_2}}.
@@ -118,7 +118,7 @@ Now that we have laid out most of the relevant definitions concerning binary rel
  	\end{itemize}
 \end{proof}
 
-\begin{corollary} \label{glueing-functions}
+\begin{corollary}[Glueing functions] \label{glueing-functions}
 	Let $A,B$ be sets and $\{A_i\}_{i \in I}$ be a cover for $A$. Suppose we are given an index set $K$, a function $i : K \to I$ and a family of functions $\{f_k : A_{i(k)} \to B \}_{k \in K}$ with the following properties~:
 	\\
 
