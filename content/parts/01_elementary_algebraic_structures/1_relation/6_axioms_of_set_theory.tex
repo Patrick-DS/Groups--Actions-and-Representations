@@ -1,0 +1,139 @@
+\section{Axioms of set theory}
+
+We'll need to work with a specific theory for defining sets (Tarski-Grothendieck set theory), so before moving forward, let us first list the classical set theory axioms from Zermelo-Fraenkel we've been implicitly assuming so far. The Tarski-Grothendieck set theory will be defined subsequently and builds on these axioms.
+\\
+
+\begin{axiom}[Axiom of Extensionality] \label{axiom-of-extensionality}
+    Two sets $x$, $y$ are defined to be equal if they contain the same elements. 
+    \[
+        \forall x \quad \forall y \quad [ \forall z \quad ( z \in x \Leftrightarrow z \in y) \implies (x = y)]
+    \]
+\end{axiom}
+
+\begin{axiom}[Axiom of Regularity] \label{axiom-of-regularity}
+    For every non-empty set $x$, there exists a set $y \in x$ such that $x$ and $y$ have no elements in common.
+    \[
+        \forall x \quad [ \exists a \quad (a\in x) \implies \exists y \quad ( \, y \in x \land (\lnot \exists z \quad (z \in y \land z \in x)) \, ) ]
+    \]
+\end{axiom}
+
+\begin{axiom}[Axiom schema of Specification] \label{axiom-schema-of-specification}
+    For any set $x$, if $\varphi$ is a logical formula describing a property of elements $z$ of $x$ using finitely many sets $w_1, \cdots, w_n$ as parameters for $\varphi$, then the subset $y$ of $x$, containing exactly those elements $z \in x$ where $\varphi(z,w_1,\cdots,w_n,x)$ holds, exists. 
+    \[
+        \forall x \quad \forall w_1 \, \ldots \, \forall w_n \quad \exists y \quad \forall z \quad [ (z \in y) \iff ( (z \in x) \land \varphi(z,w_1,...,w_n,x)) ]    
+    \]
+\end{axiom}
+
+\begin{remark}
+    We call this axiom an \textbf{axiom schema} because there is one axiom per logical formula $\varphi$. In practice, the simplified interpretation of this axiom schema is that "properties of elements of a set defines subsets". This is what allows to define things like
+    \[
+        \{ x \in \N \, \mid \, \exists n \in \N \st n^2 = x \}
+    \]
+    (which describes the set of all squared integers). Given sets $w_1,\cdots,w_n$ and $x$ with a formula $\varphi$, the set described by the axiom of specification for $\varphi$ is denoted by the expression
+    \[
+        \{ z \in x \, \mid \, \varphi(z,w_1,\cdots,w_n,x) \}    
+    \]
+    In the example that we just gave, we take $w = \N$, and $\varphi(z,\N,x) = ( \, \exists z \in \N \quad (z^2 = x) \, )$. 
+\end{remark}
+
+\begin{axiom}[Axiom of Pairing] \label{axiom-of-pairing}
+    For any two sets $x$ and $y$, there exists a set $p$ containing both of them.
+    \[
+        \forall p \quad \forall y \quad \exists p ( (x \in p) \land (y \in p) )
+    \]
+\end{axiom}
+
+\begin{remark}
+    To get a set which contains \textbf{exactly} the sets $x$ and $y$ (i.e. the set $\{x,y\}$), we need to use Axiom schema of Specification on the set $p$ and the formula 
+    \[
+        \varphi(z,x,y) = ((z = x) \vee (z = y))
+    \]
+    to get the set
+    \[
+        \{x,y\} = \{ z \in p \, \mid \, \varphi(z,x,y) \}.    
+    \]
+    To get the pair $(x,y)$ as defined before, we need to apply the previous axiom to the sets $x$ and $x$ to get $\{x,x\} = \{x\}$, then again to $x$ and $y$ to get $\{x,y\}$, and a third time to $\{x\}$ and $\{x,y\}$ to get $\{\{x\}, \{x,y\}\} = (x,y)$.
+\end{remark}
+
+\begin{axiom}[Axiom of Union]
+    For every set $x$, there exists a set $u$ which contains the elements of elements of $x$. 
+    \[
+        \forall x \quad \exists u \quad \forall y \quad \forall z \quad ( (z \in y) \land (y \in x) \implies (z \in u) )
+    \]
+\end{axiom}
+
+\begin{remark}
+    To get the set $\bigcup I$ from a set $I$, we need to use the Axiom schema of Specification on the set $u$~:
+    \[
+        \bigcup I = \{ z \in U \, \mid \, \exists i \quad (z \in i) \land (i \in I) \}    
+    \]
+    We usually denote the element $i \in I$ by $A_i$ and write $\bigcup_{i \in I} A_i$ when a set $I$ is used to index an union (or a sum, product, etc.).
+\end{remark}
+
+\begin{remark}
+    We can use the previous axioms to prove that there are no circular chains of containment, i.e. something of the form
+    \[
+        x_1 \ni x_2 \ni \cdots \ni x_{n-1} \ni x_n \ni x_1
+    \]
+    To see this, use the Axiom of Pairing to form the set $\{x_1,x_2\}$. Then, use it again to form $\{\{x_1,x_2\}, \{x_3\}\}$, and then use the Axiom of Union to form the set $\{x_1,x_2,x_3\}$. Continuing in this fashion finitely many times, we obtain the set $\{x_1,x_2, \cdots, x_{n-1}, x_n\}$. Any element of this set contains another element of this set by construction, so we obtained a contradiction to the Axiom of Regularity.
+    \\
+
+    In particular, for any non-empty set $x$, we have $x \notin x$ (this is also trivially true for the empty set). Even though the proof reduces to building the set $\{x\}$ (because $x \in x$ would imply that $x$ is an element of $x$ and $\{x\}$, a contradiction), we still need the Axiom of Pairing (but not the Axiom of Union) to build the set $\{x\}$.
+    \\
+    
+    It is also to be understood that when we say "use the Axiom of Pairing" (resp. Union), we really mean implicitly "combined with the Axiom schema of Specification" to form the set $\{x,y\}$ (resp. to form the union).
+\end{remark}
+
+
+\begin{axiom}[Axiom of Infinity]
+    Define the \textbf{successor} of a set as $S(x) = x \cup \{x\}$ (which exists by the Axiom of Pairing and the Axiom of Union). A set $I$ is said to be \textbf{inductive} if $\varnothing \in I$ and it contains the successors of all its elements. 
+    \\
+
+    The axiom claims the existence of an inductive set.
+    \[
+        \exists I \quad \left[ (I \neq \varnothing) \land ( \forall x \quad (x \in I) \implies (S(x) \in I) ) \right]
+    \]
+\end{axiom}
+
+\begin{remark}
+    This axiom is important for one very relevant fact~: it is the only axiom that proves the existence of a given set without relying on other sets. In particular, since a set exists, by the Axiom schema of Specification, the empty set exists~:
+    \[
+        \varnothing = \{ x \in I \, \mid \, x \neq x \}.    
+    \]
+    If it weren't for this set, there could be a model of set theory that satisfies all the other axioms only because they are all vacuously true, i.e. no set exists in that model. The Axiom of Infinity prevents that from happening.
+\end{remark}
+
+\begin{axiom}[Axiom of Power set]
+    For any set $x$, there exists a set $p$ such that any subset of $x$ is an element of $p$.
+    \[
+        \forall x, \quad \exists p \quad (\forall y, \quad (y \subseteq x) \implies (y \in p)).    
+    \]
+\end{axiom}
+
+\begin{remark}
+    Again, to get the set we usually denote by $\pow x$, we need the Axiom schema of Specification to the set $p$ given by the axiom~:
+    \[
+        \pow x = \{ y \in p \, \mid \, (y \subseteq x) \implies (y \in p) \}    
+    \]
+\end{remark}
+
+\begin{axiom}[Axiom schema of Replacement]
+    Let $\varphi$ be a logical formula depending on set parameters $w_1,\cdots,w_n$ and $x,y,A$. Suppose that for each $x \in A$, $\varphi(x,y,A,w_1,\cdots,w_n)$ is true for exactly one set $y$ (making $x \mapsto y \st \varphi(x,y,A,w_n,\cdots,w_n)$ a \textbf{logical function} of sorts). Then there exists a set $B$ which contains all of those $y$'s. 
+    \[
+        \forall w_1 \ldots \forall w_n \quad \forall A \left[ (\forall x( x \in A \implies \exists ! \, y \, \varphi)) \implies \exists B\ \forall x \left( x \in A \implies \exists y( (y \in B) \land \varphi )  \right) \right]
+    \]
+\end{axiom}
+
+\begin{remark}
+    This axiom is a bit hard to understand without informally giving examples because of the following. Suppose $f : A \to B$ is a function between two sets. Then $\{ y \in B \, \mid \, \exists x \in A \st f(x) = y \}$ is already a set by the Axiom schema of Specification, so we don't need the Axiom schema of Replacement to define it. But that's not what this is for. 
+    \\
+
+    As an example, suppose we want to prove that there exists no infinite descending chains of containments, i.e. (informally speaking) situations of the form
+    \[
+        x_1 \ni x_2 \ni \cdots \ni x_n \ni x_{n+1} \ni \cdots    
+    \]
+    Concretely, we would begin with an inductive set $I$, and say that for each $i \in I$, we have a set $x_i$, and for all $i \in I$, $x_{S(i)} \in x_i$. We claim that this situation is impossible. To begin, we need the Axiom schema of Replacement to form the set $X = \{ x_i \, \mid \, i \in I \}$. Now suppose $x \in X$. Then $x = x_i$ For some $i \in I$. But then $x_{S(i)} \in x_i$ and $x_{S(i)} \in X$, which is not allowed by the Axiom of Regularity. 
+    \\
+
+    In other words, what the Axiom schema of Replacement allows to do is that if some logical formula defines a collection of sets, and this collection is indexed by a set, then this collection of sets is also a set. This is what happened in the example with the collection of the $x_i$'s. 
+\end{remark}

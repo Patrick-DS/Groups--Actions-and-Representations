@@ -132,10 +132,12 @@
 % Defines the theorem text style for each type of theorem to one of the three styles above
 \newcounter{dummy} 
 \numberwithin{dummy}{section}
+\newcounter{axiom}
 \theoremstyle{ocrenumbox}
 \newtheorem{theoremeT}[dummy]{Theorem}
 \newtheorem{problem}{Problem}[chapter]
 \newtheorem{exerciseT}{Exercise}[chapter]
+\newtheorem{axiomT}{Axiom}[axiom]
 \theoremstyle{blacknumex}
 \newtheorem{exampleT}{Example}[chapter]
 \theoremstyle{blacknumbox}
@@ -248,6 +250,13 @@
             }
         \end{exerciseT}
     \end{eBox}
+}	
+\newenvironment{axiom}{
+    \begin{dBox}
+        \begin{axiomT}
+}{
+        \end{axiomT}
+    \end{dBox}
 }				  
 \newenvironment{definition}{
     \begin{dBox}
