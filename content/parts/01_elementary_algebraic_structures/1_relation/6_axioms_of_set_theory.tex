@@ -80,7 +80,7 @@ We'll need to work with a specific theory for defining sets (Tarski-Grothendieck
 
     In particular, for any non-empty set $x$, we have $x \notin x$ (this is also trivially true for the empty set). Even though the proof reduces to building the set $\{x\}$ (because $x \in x$ would imply that $x$ is an element of $x$ and $\{x\}$, a contradiction), we still need the Axiom of Pairing (but not the Axiom of Union) to build the set $\{x\}$.
     \\
-    
+
     It is also to be understood that when we say "use the Axiom of Pairing" (resp. Union), we really mean implicitly "combined with the Axiom schema of Specification" to form the set $\{x,y\}$ (resp. to form the union).
 \end{remark}
 
@@ -125,10 +125,10 @@ We'll need to work with a specific theory for defining sets (Tarski-Grothendieck
 \end{axiom}
 
 \begin{remark}
-    This axiom is a bit hard to understand without informally giving examples because of the following. Suppose $f : A \to B$ is a function between two sets. Then $\{ y \in B \, \mid \, \exists x \in A \st f(x) = y \}$ is already a set by the Axiom schema of Specification, so we don't need the Axiom schema of Replacement to define it. But that's not what this is for. 
+    This axiom is a bit hard to understand without informally giving examples because of the following. Suppose $f : A \to B$ is a function between two sets. Then $\{ y \in B \, \mid \, \exists x \in A \st f(x) = y \}$ is already a set by the Axiom schema of Specification, so we don't need the Axiom schema of Replacement to define it. But although this axiom is meant to determine that images under a "logical function" of sets are also sets, that's not what this is for. 
     \\
 
-    As an example, suppose we want to prove that there exists no infinite descending chains of containments, i.e. (informally speaking) situations of the form
+    As a better example, suppose we want to prove that there exists no infinite descending chains of containments, i.e. (informally speaking) situations of the form
     \[
         x_1 \ni x_2 \ni \cdots \ni x_n \ni x_{n+1} \ni \cdots    
     \]
