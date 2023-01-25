@@ -8,14 +8,14 @@ In this section, we detail some properties of partial orders that are relevant t
     \\
 
     \begin{itemize}
-        \item[(i)] \textbf{minimal in $T$} if there are no elements in $T$ greater than it.
+        \item[(i)] \textbf{minimal in $T$} if there are no elements in $T$ smaller than it.
         \[
-            \forall t \in T, \quad s \le t \implies s = t
+            \forall t \in T, \quad t \le s \implies t = s.
         \]
 
-        \item[(ii)] \textbf{maximal in $T$} if there are no elements in $T$ smaller than it.
+        \item[(ii)] \textbf{maximal in $T$} if there are no elements in $T$ greater than it.
         \[
-            \forall t \in T, \quad t \le s \implies t = s.    
+            \forall t \in T, \quad t \ge s \implies t = s.    
         \]
 
         \item[(iii)] \textbf{a minimum of $T$} if every other element of $T$ is greater than it. 
@@ -40,11 +40,15 @@ In this section, we detail some properties of partial orders that are relevant t
     \[
         \ge \,\, \defn \,\, \le^{\top}, \qquad a \ge b \iff b \le a.     
     \]
-    This always defines a poset $(P, \ge)$ because reflexivity, antisymmetry and transitivity trivially follow from the same properties of $(P,\le)$. We call it the \textbf{opposite poset} of $P$. (The same definition holds for other symbols, e.g. $(P,>)$ is the opposite poset of $(P, <)$.)
+    This always defines a poset $(P, \ge)$ because antisymmetry and transitivity trivially follow from the same properties of $(P,\le)$. We call it the \textbf{opposite poset} of $P$. (The same definition holds for other symbols, e.g. $(P,>)$ is the opposite poset of $(P, <)$.)
 \end{example}
 
+\begin{remark}
+    When $(P,<)$ is a strict poset, the expression $a \le b$ stands as a short-hand for $a < b$ or $a=b$. In particular, strict posets can have minima by interpreting Definition \autoref{min-max-defs} with this convention. Similarly, if $(P, \le)$ is a non-strict poset, then $a < b$ is short-hand for $a \le b$ and $a \neq b$. 
+\end{remark}
+
 \begin{definition} \label{well-ordered-sets}
-    Let $(P,<)$ be a strict poset. We say that $(P, \le)$ is 
+    Let $\alpha = (P,<)$ be a strict poset. We say that $\alpha$ is 
     \\
 
     \begin{itemize}
@@ -62,41 +66,271 @@ In this section, we detail some properties of partial orders that are relevant t
                 \\
             \end{itemize}
 
-        \item[(iii)] \textbf{finite} if $(P, <)$ and the opposite poset $(P, >)$ are both well-ordered. In other words, $(P,<)$ is finite if every non-empty subset $T \subseteq P$ admits a minimum and a maximum.
+        \item[(iii)] \textbf{finite} if $(P, <)$ and the opposite poset $(P, >)$ are both well-ordered. In other words, $\alpha$ is finite if every non-empty subset $T \subseteq P$ admits a minimum and a maximum.
         \\
 
-        \item[(iv)] an \textbf{infinite ordinal} if it is an ordinal which is not finite (in other words, some subset of $P$ admits no maximum).
+        \item[(iv)] an \textbf{infinite ordinal} if it is well-ordered but not finite (so that some non-empty subset of it admits no maximum).
     \end{itemize}
 \end{definition}
 
 \begin{remark}
     In practice, to show that a poset $(P,<)$ is well-ordered, it suffices to show that every non-empty subset $T \subseteq P$ admits a minimum. For if this is true and $p,q \in P$ are distinct, the subset $\{p,q\} \subseteq P$ has a minimum. If it is $p$, then $p = \min\{p,q\} < q$. If it is $q$, then $q = \min\{p,q\} < p$. This proves $P$ is linearly ordered. However, the proof that every subset $T \subseteq P$ admits a minimum often relies on the case where $T = \{p,q\}$ to be proven first.
+\end{remark}
+
+\begin{remark}
+    If $(P, <)$ is linearly ordered, then $(P, >)$ is automatically linearly ordered. So to show that a well-ordered poset is finite, it suffices to find a maximum for any non-empty subset $T \subseteq P$.
+\end{remark}
+
+\begin{remark}
+    If $\alpha = (P,<)$ is an ordinal, then $p < q$ if and only if $p \in q$. So once we know that the set $P$ defines an ordinal, the data of the relation $<$ doesn't add any information. We therefore reserve the right to denote by $\alpha$ both the poset and the underlying set that defines the ordinal, i.e. $\alpha = (\alpha, \in)$.
+\end{remark}
+
+
+\begin{definition} \label{morphisms-of-posets}
+    Let $\Phi : (P,\le) \to (Q,\le)$ be a function between two posets, i.e. $\Phi : P \to Q$ is a function. 
     \\
 
-    If $(P, <)$ is linearly ordered, then $(P, >)$ is automatically linearly ordered. So to show that a well-ordered poset is finite, it suffices to find a maximum for any subset $T \subseteq P$.
+    \begin{itemize}
+        \item[(i)] We say that $\Phi$ is \textbf{non-decreasing} if for all $p,p' \in P$, the inequality $p \le p'$ implies $\Phi(p) \le \Phi(p')$. If $(P,<)$ and $(Q,<)$ are strict posets instead, and $p < p'$ implies $\Phi(p) < \Phi(p')$, we say that $\Phi$ is \textbf{increasing}.
+        \\
+
+        \item[(ii)] If $\Phi$ is bijective and $\Phi^{-1} : (Q,\le) \to (P,\le)$ is also non-decreasing, then $\Phi$ is said to be a \textbf{poset isomorphism}. When there exists a poset isomorphism between $(P,\le)$ and $(Q,\le)$, we write $(P,\le) \simeq (Q,\le)$.
+        \\
+
+    \end{itemize}
+\end{definition}
+
+\begin{proposition} \label{extrema-under-poset-morphisms}
+    Let $\Phi : (P,\le) \to (Q,\le)$ be a non-decreasing function and $T \subseteq P$ be a subset.
+    \\
+
+    \begin{itemize}
+        \item[(i)] Suppose $\Phi$ is a poset isomorphism. The element $p \in T$ is minimal (resp. maximal) if and only if $\Phi(p) \in \Phi(T)$ is minimal (resp. maximal).
+        \\
+
+        \item[(ii)] Suppose $\Phi$ is surjective. If $T$ admits a minimum (resp. a maximum), then so does $\Phi(T)$ and $\Phi(\min T) = \min \Phi(T)$ (resp. $\Phi(\max T) = \max \Phi(T)$).
+        \\
+
+    \end{itemize}
+\end{proposition}
+
+\begin{proof}
+    \begin{itemize}
+        \item[(i)] Let $q \in \Phi(T)$ be such that $q \le \Phi(p)$. It follows that $\Phi^{-1}(q) \le p$, therefore $\Phi^{-1}(q) = p$ and $q = \Phi(p)$. We deduce that $\Phi(p)$ is minimal. Since $\Phi^{-1}$ is also a poset isomorphism, the reverse implication follows from the one we just proved applied to $\Phi^{-1}$. The proof in the case of maximality follows from the proof of minimality applied to the opposite posets $(P, \ge)$ and $(Q, \ge)$. 
+        \\
+
+        \item[(ii)] Let $q \in \Phi(T)$, and find $p \in T$ such that $\Phi(p) = q$, which exists because $\Phi$ is surjective. By definition, we have $\min T \le p$, therefore $\Phi(\min T) \le \Phi(p) = q$. It follows that $\Phi(\min T) = \min \Phi(T)$. Again, the proof applied to the posets $(P, \ge)$ and $(Q, \ge)$ proves the case of the maximum. 
+        \\
+
+    \end{itemize}
+\end{proof}
+
+\begin{remark}
+    It is important that the inverse map to $\Phi$ is non-decreasing to be able to carry over the minimum from $P$ to $Q$. Suppose we start with a poset $(P,\le)$ that has a minimal element $p$, and we consider the poset $(P,=)$ where the only pairs of comparable elements are of the form $(p,p)$ for $p \in P$ (one can easily see that this defines a poset). The identity map $\id P : (P,=) \to (P, \le)$ is bijective and vacuously non-decreasing, and furthermore every element of $(P, =)$ is minimal. Clearly not every element of $P$ can be minimal for any poset $p$, so even being bijective and non-decreasing isn't enough to allow $\Phi$ to send minimal elements to minimal elements. 
 \end{remark}
+
+\begin{proposition} \label{morphisms-of-linearly-ordered-posets}
+    Let $\Phi : (P, <) \to (Q,<)$ be an increasing function between two strict posets, and assume $(P,<)$ is linearly ordered.
+    \\
+
+    \begin{itemize}
+        \item[(i)] The function $\Phi$ is injective.
+        \\
+
+        \item[(ii)] If $\Phi$ is surjective, then $\Phi$ is a poset isomorphism. In particular, any function $\Phi$ (surjective or not) induces a poset isomorphism $(P, <) \simeq (\Phi(P), <)$.
+        \\
+
+        \item[(ii)] If $(P,<)$ is well-ordered and $\Phi$ is an isomorphism, then $(Q,<)$ is well-ordered.
+        \\
+
+    \end{itemize}
+\end{proposition}
+
+\begin{proof}
+    \begin{itemize}
+        \item[(i)] Let $p,p' \in P$ be distinct elements. Without loss of generality, we may assume $p < p'$. But then $\Phi(p) < \Phi(p')$, and in particular $\Phi(p) \neq \Phi(p')$. Therefore $\Phi$ is injective.
+        \\
+
+        \item[(ii)] By part (i), $\Phi$ is bijective. We want to show that $\Phi^{-1} : (Q,<) \to (P,<)$ is increasing. Let $q,q' \in Q$ with $q < q'$ and write $p = \Phi(q)$, $p' = \Phi(q')$. In particular, $q \neq q'$, so $p \neq p'$. If $p' < p$, we would have $q' = \Phi(p') < \Phi(p) = q < q'$, a contradiction. Therefore, since $(P,<)$ is linearly ordered, we have $\Phi^{-1}(q) = p < p' = \Phi^{-1}(q')$, so $\Phi^{-1}$ is increasing. The last statement is clear since restricting the codomain of $\Phi$ to its image makes it surjective.
+        \\
+
+        \item[(iii)] It follows from Proposition \autoref{extrema-under-poset-morphisms} that for a non-empty subset $T \subseteq Q$, we have 
+        \[
+            \min T = \Phi(\min \Phi^{-1}(T)),   
+        \]
+        so $(Q,<)$ is well-ordered.
+        \\
+
+    \end{itemize}
+\end{proof}
+
+\begin{proposition} \label{posets-as-subposets-of-a-power-set}
+    Let $\alpha = (P, <)$ be a well-ordered poset. Then
+    \[
+        \Phi : P \to \pow P, \quad p \mapsto P_p \defn \{ q \in P \, \mid \, q < p \}
+    \]
+    is increasing, so that $\Phi : \alpha \to (\Phi(P), \subsetneq)$ is a poset isomorphism. It follows that $(\Phi(P), \subsetneq)$ is well-ordered. If $T \subseteq \Phi(P)$ is a non-empty subset, then
+    \[
+        \min T = \bigcap_{t \in T} t.    
+    \]
+\end{proposition}
+
+\begin{proof}
+    By Proposition \autoref{morphisms-of-linearly-ordered-posets}, all we have left to prove is that $\min T = \bigcap_{t \in T} t$ for $T \subseteq \Phi(P)$ non-empty. 
+    \\
+    
+    If $t = \min T$, then for all $t' \in T$, we have $t \subsetneq t'$ or $t = t'$, which can be summarized by $t \subseteq t'$. So $\min T$ is characterized by $\min T \in T$ and $\min T \subseteq t$ for all $t \in T$. 
+    \\
+
+    By Proposition \autoref{extrema-under-poset-morphisms}, we have the formula $\min T = \Phi(\min \Phi^{-1}(T))$ (in particular, $\min T$ exists), so let $p \defn \min \Phi^{-1}(T)$. We show that $\Phi(p) = \bigcap_{t \in T} t$, which suffices to finish the proof. Since $\alpha$ is linearly ordered, we have $p < \Phi^{-1}(t)$ for all $t \in T \setminus \{\Phi(p)\}$ by definition of $p$, so $\Phi(p) \subsetneq t$ for all such $t$. It follows that $\Phi(p) \subseteq t$ for all $t \in T$, so since $\Phi(p) \in T$, we have $\Phi(p) = \bigcap_{t \in T} t$.
+\end{proof}
+
+\begin{remark}
+    It is Proposition \autoref{posets-as-subposets-of-a-power-set} that motivated John von Neumann to define the ordinals the way we defined them. Von Neumann ordinals are basically well-ordered subsets where the map $\Phi$ above is the identity, and $\subsetneq$ is equal to $\in$ as a relation on the poset.
+\end{remark}
+
+\begin{theorem}[Transfinite induction] \label{transfinite-induction}
+    Let $\alpha = (Q, <)$ be a well-ordered poset and let $P$ be a property of elements of $Q$. For $q,q' \in Q$, if whenever $P(q')$ holds for all $q' < q$ implies that $P(q)$ holds, then $P(q)$ is true for all $q \in Q$. 
+\end{theorem}
+
+\begin{proof}
+    Consider the subset $S \subseteq Q$ of all $q \in Q$ for which $P(q)$ is false, and suppose it is not empty. Since $\alpha$ is well-ordered, let $q = \min S$. By assumption, for all $q' \in Q$ with $q' < q$, $P(q')$ holds because $q' \in Q \setminus S$ since $q = \min S$. But then, by hypothesis, $P(q)$ holds, a contradiction. Therefore $S$ is empty and $P(q)$ holds for all $q \in Q$.
+\end{proof}
+
+\begin{proposition} \label{elements-of-ordinals-are-ordinals}
+    Let $\alpha$ be an ordinal. Any element $\beta \in \alpha$ is an ordinal.
+\end{proposition}
+
+\begin{proof}
+    Since $\alpha$ is an ordinal, $\beta \in \alpha$ implies $\beta \subseteq \alpha$. In particular, $\beta$ is well-ordered with the binary relation "$\in$" since $\alpha$ is. If $\gamma \in \beta$, since $\beta \subseteq \alpha$, we have $\gamma \in \alpha$ and thus $\gamma \subseteq \alpha$. But $\alpha$ is a poset, so $\varepsilon \in \gamma$ together with $\gamma \in \beta$ implies $\varepsilon \in \beta$, thus $\gamma \subseteq \beta$. This proves $\beta$ is an ordinal.
+\end{proof}
+
+\begin{theorem}[Unicity of ordinals] \label{unicity-of-ordinals}
+    Let $(P,<)$ be a well-ordered strict poset and $\alpha,\beta$ be ordinals.
+    \\
+
+    \begin{itemize}
+        \item[(i)] If there exists a poset isomorphism $\Phi : \alpha \to \beta$, then $\alpha = \beta$. 
+        \\
+
+        \item[(ii)] For any ordinal $\alpha$, the set $S(\alpha) \defn \alpha \cup \{\alpha\}$ is also an ordinal.
+        \\
+
+        \item[(iii)] There exists a unique ordinal $\alpha$ with $\alpha \simeq (P,<)$. 
+        \\
+
+        \item[(iv)] If $\alpha, \beta$ are two ordinals, either $\alpha \in \beta$ or $\beta \in \alpha$.
+        \\
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    \begin{itemize}
+        \item[(i)] Let $\Phi : \alpha \to \beta$ be a poset isomorphism. We show by transfinite induction that for all $\gamma \in \alpha$, we have $\gamma \subseteq \Phi(\gamma) \in \beta$, which proves that $\alpha \subseteq \beta$~; applying the same result to $\Phi^{-1}$ shows $\beta \subseteq \alpha$, and therefore $\alpha = \beta$.
+        \\
+        
+        By Proposition \autoref{elements-of-ordinals-are-ordinals}, $\gamma$ is an ordinal. We can consider $\Phi|_{\gamma} : \gamma \to \beta$ since $\gamma \in \alpha$ implies $\gamma \subseteq \alpha$. Suppose that for all $\delta \in \gamma$, we have $\delta = \Phi(\delta)$. It follows that $\gamma \subseteq \Phi(\gamma)$. Conversely, let $\delta' \in \Phi(\gamma)$, so that $\delta' = \Phi(\delta)$ for some $\delta \in \gamma$. This implies $\delta' = \Phi(\delta) = \delta \in \gamma$, so that $\Phi(\gamma) \subseteq \gamma$, which proves equality.
+        \\
+
+        \item[(ii)] We first show that $S(\alpha)$ is linearly ordered. If $\beta,\gamma \in S(\alpha)$ are distinct, then either both are in $\alpha$ (in which case $\beta \in \gamma$ or $\gamma \in \beta$ because $\alpha$ is linearly ordered), or one of them is equal to $\alpha$~; without loss of generality, assume $\beta = \alpha$. It follows that $\gamma \in S(\alpha) \setminus \{\alpha\} = \alpha = \beta$, as desired.
+        \\
+
+        If $T \subseteq S(\alpha)$ is not empty, then either $T \subseteq \alpha$ (in which case $\min T \in \alpha$ exists), or $\alpha \in T$. For all $\beta \in \alpha$, we have $\beta < \alpha$ by definition of the order, so unless $T = \{\alpha\}$ (in which case $\min T = \alpha$), we have $T \setminus \{\alpha\} \subseteq \alpha$ and $\min T = \min (T \setminus \{\alpha\})$ (where the latter minimum exists because $\alpha$ is well-ordered). It follows that $S(\alpha)$ is well-ordered. 
+        \\
+
+        If $\beta \in S(\alpha)$, then either $\beta \in \alpha$ (in which case $\beta \subseteq \alpha \subseteq S(\alpha)$) or $\beta = \alpha \subseteq S(\alpha)$. We conclude that $S(\alpha)$ is an ordinal.
+        \\
+
+        \item[(iii)] Unicity of the ordinal $\alpha$, if it exists, follows by part~(i). For existence, we proceed by transfinite induction on $p \in P$, which is possible since $P$ is well-ordered. For $q \in P$, set $P_q \defn \{ r \in P \, | \, r < q \}$. Suppose that for some $p \in P$, we have the following data for each $q \in P_p$~:
+        \\
+
+        \begin{itemize}
+            \item[$\bullet$] an ordinal $\alpha_q$
+            \\
+
+            \item[$\bullet$] an isomorphism $\Phi_q : P_q \to \alpha_q$
+            \\
+
+        \end{itemize}
+        and that they satisfy the following:
+        \\
+
+        \begin{itemize}
+            \item[$\bullet$] the ordinal $\alpha_q$ satisfies $\alpha_q = \{ \alpha_r \, | \, r \in P_q \}$
+            \\            
+            
+            \item[$\bullet$] for $q,r \in P$ with $r < q$, we have $\Phi_q(r) = \alpha_r$.
+            \\ 
+        \end{itemize}
+
+        We show that 
+        \[
+            \alpha_p \defn \{ \alpha_q \, | \, q \in P_p \}    
+        \]
+        is an ordinal and that the function $\Phi_p : P_p \to \alpha_p$ given by $\Phi_p(q) = \alpha_q$ for all $q \in P_p$ is a poset isomorphism. 
+        \\
+
+        Note that $\alpha_p$ is linearly ordered since for $q,q' \in P_p$ with $q < q'$, by definition of $\alpha_{q'}$, we have $\alpha_q \in \alpha_{q'}$. Also, $\alpha_q \in \alpha_p$ implies $\alpha_q = \{ \alpha_{q'} \, | \, q' \in P_q \} \subseteq \alpha_p$ since $P_q \subseteq P_p$. It remains to show that $\alpha_p$ is well-ordered to prove it is an ordinal.
+        \\
+        
+        If $T \subseteq \alpha_p$ is a non-empty subset, let $\alpha_q \in T$. If $\min T = \alpha_q$, we have nothing to show. Otherwise, there exists $\alpha_r \in T$ with $\alpha_r < \alpha_q$ (because $\alpha_p$ is linearly ordered), which implies $r < q$ (because $P$ is linearly ordered, $r$ and $q$ have to be distinct since $\alpha_r < \alpha_q$, and $q < r$ implies $\alpha_q < \alpha_r$, a contradiction). We deduce that $\alpha_r \in T \cap \alpha_q \neq \varnothing$, and since $\alpha_q$ is an ordinal with $T \cap \alpha_q \subseteq \alpha_q$, we see that $\min(T \cap \alpha_q)$ exists. Any element of $T \setminus (T \cap \alpha_q)$ is greater than $\min(T \cap \alpha_q)$ since $\alpha_p$ is linearly ordered and $\alpha_r < \alpha_q$ implies $\alpha_r \in \alpha_q$, so $\min T = \min(T \cap \alpha_q)$ exists.
+        \\
+
+        It is clear that $\Phi_p : P_p \to \alpha_p$ given by $q \mapsto \alpha_q$ is increasing, since $r < q$ implies $\alpha_r \in \alpha_q$ by definition. By definition of $\alpha_p$, $\Phi_p$ is surjective, so it is an isomorphism. 
+        \\
+
+        Now consider 
+        \[
+            \alpha \defn \{ \alpha_p \, | \, p \in P \}, \quad \Phi : P \to \alpha, \quad p \mapsto \alpha_p.     
+        \]
+        It is clear that $\alpha$ is linearly ordered since $P$ is. We only used the fact that $\alpha_p$ was linearly ordered to show that it is well-ordered, so the same argument shows that $\alpha$ is also well-ordered. If $\alpha_p \in \alpha$, then $\alpha_p \subseteq \alpha$ because for all $q < p$, $\alpha_q \in \alpha$ as well. Therefore, $\alpha$ is an ordinal. 
+        \\
+
+        The map $\Phi$ is increasing since for $q < p$, we have $\alpha_q \in \alpha_p$ by definition of $\alpha_p$. The map $\Phi$ is also surjective by definition of $\Phi$ and $\alpha$, so it is an isomorphism. 
+    \end{itemize}
+\end{proof}
+
+\begin{definition} \label{successor-and-limit-ordinals}
+    Let $\alpha$ be an ordinal.
+    \\
+
+    \begin{itemize}
+        \item[(i)] We say that $\alpha$ is a \textbf{successor ordinal} if $\max \alpha$ exists and $\alpha = S(\max \alpha)$.
+        \\
+        
+        \item[(ii)] We say that $\alpha$ is a \textbf{limit ordinal} if $\alpha \neq \varnothing$ and $\max \alpha$ does not exist.
+        \\
+
+    \end{itemize}
+\end{definition}
 
 \begin{definition}[Natural numbers] \label{natural-numbers}
     Let $I$ be an inductive set. We define $\N$ as the intersection of all inductive sets contained in $I$. (Note that if $I'$ is another inductive set, then $I' \cap I$ is also inductive, so this definition is independent of the choice of $I$.)
     \\
 
-    We say that $n \in \N$ is a \textbf{natural number} if it becomes a finite ordinal strict poset when equipped with the relation of set membership (i.e. for $i,j \in n$, we set $i < j$ if $i \in j$).
+    We say that $n \in \N$ is a \textbf{natural number} if it becomes a finite ordinal when equipped with the relation of set membership (i.e. for $i,j \in n$, we set $i < j$ if $i \in j$).
 \end{definition}
 
 \begin{theorem}[Weak induction principle] \label{weak-induction-on-natural-numbers}
-    Let $P$ be a property satisfied by natural numbers (defined by a logical formula). If the set 
-    \[
-        \N(P) \defn \{ x \in \N \, \mid P(n) \text{ is true} \}    
-    \]
-    satisfies the two following conditions~:
+    Let $P$ be a property satisfied by natural numbers (defined by a logical formula). If $P$ satisfies the two following conditions~:
+    \\
+
     \begin{itemize}
         \item[$\bullet$] $P(\varnothing)$ is true
+        \\
+
         \item[$\bullet$] If $n \in \N$ and $P(n)$ is true, then $P(S(n))$ is true
+        \\
+
     \end{itemize}
-    then $\N(P) = \N$, i.e. $P(n)$ is true for all $n \in \N$.
+    then $P(n)$ is true for all $n \in \N$.
 \end{theorem}
 
 \begin{proof}
+    Consider the set
+    \[
+        \N(P) \defn \{ x \in \N \, \mid \, P(n) \text{ is true } \}    
+    \]
     The conditions on $\N(P)$ imply that $\N(P)$ is inductive, which means $\N(P) \supseteq \N$ by definition on $\N$. But $\N(P) \subseteq \N$ by construction, so $\N(P) = \N$. 
 \end{proof}
 
@@ -105,11 +339,11 @@ In this section, we detail some properties of partial orders that are relevant t
 \end{remark}
 
 \begin{lemma} \label{natural-numbers-are-finite-ordinals}
-    For all $n \in \N$, the set $n$ equipped with the relation of set membership (i.e. for $i,j \in n$, we write $i < j$ if $i \in j$) is a finite ordinal strict poset. In other words, $\N$ is the set containing all the natural numbers.
+    For all $n \in \N$, the set $n$ equipped with the relation of set membership (i.e. for $i,j \in n$, we write $i < j$ if $i \in j$) is a finite ordinal. In other words, $\N$ is the set containing all the natural numbers.
 \end{lemma}
 
 \begin{proof}
-    We proceed by weak induction on $n$ with the proposition $P(n) \defn n$ is a natural number. The set $\varnothing$ is vacuously a finite ordinal strict poset with the empty relation. Now suppose $n \in \N$ and $P(n)$ holds. We need to show that $S(n)$ is a finite ordinal strict poset. 
+    We proceed by weak induction on $n$ with the proposition $P(n) \defn n$ is a natural number. The set $\varnothing$ is vacuously a finite ordinal with the empty relation. Now suppose $n \in \N$ and $P(n)$ holds. We need to show that $S(n)$ is a finite ordinal. 
     \\
 
     We begin by showing that it is a poset. It is antisymmetric because for any sets $x,y$, we cannot have $x \in y$ and $y \in x$ by the Axiom of Regularity (c.f. \autoref{axioms-of-set-theory}). For transitivity, suppose $x,y,z \in S(n)$ satisfy $x \in y$ and $y \in z$. If $x,y,z \in n$, since $n$ is a poset, we deduce that $x \in z$. We cannot have two or more of $x,y,z$ to be equal to $n$ by the Axiom of Regularity. If $x = n$, then $n = x \in y \in n$, contradicting the Axiom of Regularity. If $y = n$, then $n = y \in z \in n$, again a contradiction. If $z = n$, then $x \in S(n) \setminus \{z\} = n$ (because $x$ and $z$ are distinct), which means $x \in n = z$.
@@ -136,7 +370,7 @@ In this section, we detail some properties of partial orders that are relevant t
 \end{lemma}
 
 \begin{proof}
-    Antisymmetry of $\in$ is clear. For transitivity, let $n_1, n_2, n_3 \in \N$ satisfy $n_1 \in n_2 \in n_3$. Since $n_3, S(n_3) \in \N$, they are finite ordinal strict posets with $\in$ as the relation. We have $n_1 \in n_2 \subseteq n_3 \subseteq S(n_3)$, so $n_1 \in S(n_3)$. Similarly, $n_2 \in n_3 \subseteq S(n_3)$, so $n_2 \in S(n_3)$. Since $n_1, n_2, n_3 \in S(n_3)$ and $(S(n_3), \in)$ is a poset, we deduce that $n_1 \in n_3$. 
+    Antisymmetry of $\in$ is clear. For transitivity, let $n_1, n_2, n_3 \in \N$ satisfy $n_1 \in n_2 \in n_3$. Since $n_3, S(n_3) \in \N$, they are finite ordinals with $\in$ as the relation. We have $n_1 \in n_2 \subseteq n_3 \subseteq S(n_3)$, so $n_1 \in S(n_3)$. Similarly, $n_2 \in n_3 \subseteq S(n_3)$, so $n_2 \in S(n_3)$. Since $n_1, n_2, n_3 \in S(n_3)$ and $(S(n_3), \in)$ is a poset, we deduce that $n_1 \in n_3$. 
 \end{proof}
 
 \begin{theorem}[Well-ordering of the naturals] \label{well-ordering-of-the-naturals}
@@ -164,11 +398,15 @@ In this section, we detail some properties of partial orders that are relevant t
     Let us now focus on the third case. If $m \in S(n) = n \cup \{n\}$, either $m = n$ (which implies $S(m) = S(n)$, hence $Q_{S(n)}(S(m))$ holds) or $m \in n$. Since $P(n)$ is true, we have $S(m) \in n$, $S(m) = n$ or $S(m) \ni n$. The first two options imply $S(m) \in n \cup \{n\} = S(n)$, so we have to exclude the third~; $n \in S(m) = m \cup \{m\}$ means either $n \in m$ (a contradiction since $m \in n$), or $n = m$ (also a contradiction since $m \in n = m$ is impossible). We just proved $P(S(n))$ is true, so $P(n)$ holds for all $n \in \N$, i.e. $(\N,\in)$ is linearly ordered. 
     \\
     
-    Now let $T \subseteq \N$ be a non-empty subset, and set $m \defn \bigcap_{t \in T} t \subseteq \N$. We claim that $m = \min T$. Since each $t \in T$ is a finite ordinal poset, so is $m$ (it suffices to verify that the required properties for natural numbers $k \in m$ are true because they hold for all $k \in t$ for all $t \in T$). Since $\N$ is linearly ordered, we have $m \in t$, $m=t$ or $m \ni t$~; the definition of $m$ implies $m \subseteq t$, so $t \in m$ would imply $m \in m$, a contradiction. Therefore, for $t \in T$, either $m \in t$ or $m = t$. If $m \in t$ for all $t \in T$, then by definition of $m$, that would imply $m \in \bigcap_{t \in T} t = m$, a contradiction. So there exists $t \in T$ with $t = m$, i.e. $m \in T$. This proves that $m = \min T$.  
+    Now let $T \subseteq \N$ be a non-empty subset, and set $m \defn \bigcap_{t \in T} t \subseteq \N$. We claim that $m = \min T$. Since each $t \in T$ is a finite ordinal, so is $m$ (it suffices to verify that the required properties for natural numbers $k \in m$ are true because they hold for all $k \in t$ for all $t \in T$). Since $\N$ is linearly ordered, we have $m \in t$, $m=t$ or $m \ni t$~; the definition of $m$ implies $m \subseteq t$, so $t \in m$ would imply $m \in m$, a contradiction. Therefore, for $t \in T$, either $m \in t$ or $m = t$. If $m \in t$ for all $t \in T$, then by definition of $m$, that would imply $m \in \bigcap_{t \in T} t = m$, a contradiction. So there exists $t \in T$ with $t = m$, i.e. $m \in T$. This proves that $m = \min T$.  
     \\
 
     Note that since $\N$ is inductive, it cannot have a maximum~: if it did, call it $n \in \N$. Then $n \in S(n) \in \N$ is strictly greater, a contradiction. Therefore, $\N$ is infinite.
- \end{proof}
+\end{proof}
+
+\begin{definition} \label{first-infinite-ordinal}
+    The ordinal $(\N,\in)$ is called the \textbf{first infinite ordinal} and is denoted by $\omega$. 
+\end{definition}
 
 \begin{lemma} \label{nonzero-naturals-have-predecessors}
     Let $n \in \N \setminus \{\varnothing\}$ be a natural number. Then $S(\max{(n)}) = n$.
@@ -182,16 +420,18 @@ In this section, we detail some properties of partial orders that are relevant t
 \end{proof}
 
 \begin{corollary}[Strong induction principle] \label{strong-induction-on-natural-numbers}
-    Let $P$ be a property satisfied by natural numbers (defined by a logical formula). If the set 
-    \[
-        \N(P) \defn \{ x \in \N \, \mid P(n) \text{ is true} \}    
-    \]
-    satisfies the two following conditions~:
+    Let $P$ be a property satisfied by natural numbers (defined by a logical formula). If $P$ satisfies the two following conditions~:
+    \\
+
     \begin{itemize}
         \item[$\bullet$] $P(\varnothing)$ is true
+        \\
+
         \item[$\bullet$] If $n \in \N$ and $P(k)$ is true for all $k \in n$, then $P(n)$ is true
+        \\
+        
     \end{itemize}
-    then $\N(P) = \N$, i.e. $P(n)$ is true for all $n \in \N$.
+    then $P(n)$ is true for all $n \in \N$.
 \end{corollary}
 
 \begin{proof}
