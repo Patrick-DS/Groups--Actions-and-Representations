@@ -85,7 +85,7 @@ We'll need to work with a specific theory for defining sets (Tarski-Grothendieck
 \end{remark}
 
 
-\begin{axiom}[Axiom of Infinity]
+\begin{axiom}[Axiom of Infinity] \label{axiom-of-infinity}
     Define the \textbf{successor} of a set as $S(x) = x \cup \{x\}$ (which exists by the Axiom of Pairing and the Axiom of Union). A set $I$ is said to be \textbf{inductive} if $\varnothing \in I$ and it contains the successors of all its elements. 
     \\
 
@@ -103,7 +103,7 @@ We'll need to work with a specific theory for defining sets (Tarski-Grothendieck
     If it weren't for this set, there could be a model of set theory that satisfies all the other axioms only because they are all vacuously true, i.e. no set exists in that model. The Axiom of Infinity prevents that from happening.
 \end{remark}
 
-\begin{axiom}[Axiom of Power set]
+\begin{axiom}[Axiom of Power set] \label{axiom-of-power-set}
     For any set $x$, there exists a set $p$ such that any subset of $x$ is an element of $p$.
     \[
         \forall x, \quad \exists p \quad (\forall y, \quad (y \subseteq x) \implies (y \in p)).    
@@ -117,7 +117,7 @@ We'll need to work with a specific theory for defining sets (Tarski-Grothendieck
     \]
 \end{remark}
 
-\begin{axiom}[Axiom schema of Replacement]
+\begin{axiom}[Axiom schema of Replacement] \label{axiom-schema-of-replacement}
     Let $\varphi$ be a logical formula depending on set parameters $w_1,\cdots,w_n$ and $x,y,A$. Suppose that for each $x \in A$, $\varphi(x,y,A,w_1,\cdots,w_n)$ is true for exactly one set $y$ (making $x \mapsto y \st \varphi(x,y,A,w_n,\cdots,w_n)$ a \textbf{logical function} of sorts). Then there exists a set $B$ which contains all of those $y$'s. 
     \[
         \forall w_1 \ldots \forall w_n \quad \forall A \left[ (\forall x( x \in A \implies \exists ! \, y \, \varphi)) \implies \exists B\ \forall x \left( x \in A \implies \exists y( (y \in B) \land \varphi )  \right) \right]
