@@ -67,7 +67,7 @@ We'll need to work with a specific theory for defining sets (Tarski-Grothendieck
     \[
         \bigcup I = \{ z \in U \, \mid \, \exists i \quad (z \in i) \land (i \in I) \}    
     \]
-    We usually denote the element $i \in I$ by $A_i$ and write $\bigcup_{i \in I} A_i$ when a set $I$ is used to index an union (or a sum, product, etc.).
+    We usually denote the element $i \in I$ by $A_i$ and write $\bigcup_{i \in I} A_i$ when a set $I$ is used to index an union (or other indexable constructions).
 \end{remark}
 
 \begin{remark}
@@ -136,4 +136,51 @@ We'll need to work with a specific theory for defining sets (Tarski-Grothendieck
     \\
 
     In other words, what the Axiom schema of Replacement allows to do is that if some logical formula defines a collection of sets, and this collection is indexed by a set, then this collection of sets is also a set. This is what happened in the example with the collection of the $x_i$'s. 
+    \\
+\end{remark}
+
+We use those axioms to build certain sets which are useful in practice. 
+\\
+
+\begin{definition}[Disjoint union] \label{disjoint-union}
+    Let $I$ be an index set, and label its elements by $A_i$ for $i \in I$ (this is just a notation because mathematically speaking, $i=A_i$). The \textbf{disjoint union} of the set $I$ is denoted by $\bigsqcup I$ or $\bigsqcup_{i \in I} A_i$ and is defined as the subset of all pairs $(a,A_i)$ of $\left( \bigcup_{i \in I} A_i \right) \times I$ with the property that $a \in A_i$ (note that the $A_i$ are distinct here since they are elements of $I$). (Its purpose is to contain a copy of each set $A_i$ which is disjoint from the other subsets $A_j$ for $j \in I$ with $i \neq j$, whence the name.)
+    \\
+
+    When given two arbitrary sets $A$ and $B$, we denote their disjoint union by $A \sqcup B$. If they were distinct, we could just define $A \sqcup B$ as $\bigsqcup \{A,B\}$, but this is not always the case as in the previous definition~; if we had $A = B$, we would obtain $\bigsqcup \{A,A\} = \bigsqcup \{A\}$, which is not what we want. 
+    \\
+    
+    To be able to compute $A \sqcup B$, accept the following definitions for now (which we will justify when we define natural numbers)~:
+    \[
+        0 \defn \varnothing, \quad 1 \defn \{ \varnothing \}   
+    \]
+    We can use the Axiom schema of Replacement and produce the set
+    \[
+        [A]_0 = \{ (a,0) \, | \, a \in A \}    
+    \] 
+    and
+    \[
+        [B]_1 = \{ (b,1) \, | \, b \in B \}    
+    \]
+    We can then define $A \sqcup B \defn \bigsqcup \{[A]_0,[B]_1\}$. The function $A \to A \sqcup B$ sends $a \in A$ to $(a,0)$, and similarly $B \to A \sqcup B$ sends $b \in B$ to $(b, 1)$~; the images of those two functions form a partition of $A \sqcup B$. 
+\end{definition}
+
+\begin{remark}
+    For $j \in I$, the images of the maps $A_j \to \bigsqcup_{i \in I} A_i$ given by $a \mapsto (a,j)$ form a partition of $\bigsqcup_{i \in I} A_i$. They are easily seen to be disjoint by having a look at the second component of pairs, and they cover $\bigsqcup_{i \in I} A_i$ by definition of the disjoint union.
+\end{remark}
+
+\begin{example}[Hom-sets] \label{hom-sets}
+    Recall that we defined $\Rel AB \defn \pow{A \times B}$, and we defined $A \times B$ as the set of ordered pairs $(a,b)$ where $a \in A$ and $b \in B$, making $A \times B$ a subset of $\pow{A \cup B}$ by the Axiom schema of Specification, thus $\Rel AB \subseteq \pow{\pow{A \cup B}}$. 
+    \\
+
+    We also defined $\Hom{\SET}AB \subseteq \Rel AB$ as the subset of all those relations which are functions. This is possible by the Axiom schema of Specification applied to $\Rel AB$. 
+
+\end{example}
+
+\begin{definition}[Product of sets] \label{set-product}
+    Let $I$ be an index set, and label its elements by $A_i$ for $i \in I$. The \textbf{product} of the sets $A_i$ is denoted by $\prod I$ or $\prod_{i \in I} A_i$. It is defined as the subset of those functions $f \in \Hom{\SET}I{\bigcup_{i \in I} A_i}$ for which $f(i) \in A_i$. 
+    \\
+\end{definition}
+
+\begin{remark}
+    We can recover a construction similar to the binary product with this by considering a new product $A \times B$ defined as $\prod \{ [A]_0, [B]_1 \}$. In this form, $A \times B$ is the set of all functions $f : \{0,1\} \to A \cup B$ with $f(0) \in A$ and $f(1) \in B$, so we easily see that this is in bijection with the binary product by sending $f$ to $(f(0), f(1))$. 
 \end{remark}
