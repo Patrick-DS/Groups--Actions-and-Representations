@@ -1,0 +1,139 @@
+\section{Induction}
+
+
+\begin{definition}[Natural numbers] \label{natural-numbers}
+    Let $I$ be an inductive set (c.f. the Axiom of Infinity). We define $\N$ as the intersection of all inductive sets contained in $I$. (Note that if $I'$ is another inductive set, then $I' \cap I$ is also inductive, so this definition is independent of the choice of $I$.)
+    \\
+
+    We say that $n \in \N$ is a \textbf{natural number} if it becomes a finite ordinal when equipped with the relation of set membership (i.e. for $i,j \in n$, we set $i < j$ if $i \in j$).
+\end{definition}
+
+\begin{theorem}[Weak induction principle] \label{weak-induction-on-natural-numbers}
+    Let $P$ be a property satisfied by natural numbers (defined by a logical formula). If $P$ satisfies the two following conditions~:
+    \\
+
+    \begin{itemize}
+        \item[$\bullet$] $P(0)$ is true
+        \\
+
+        \item[$\bullet$] If $n \in \N$ and $P(n)$ is true, then $P(S(n))$ is true
+        \\
+
+    \end{itemize}
+    then $P(n)$ is true for all $n \in \N$.
+\end{theorem}
+
+\begin{proof}
+    Consider the set
+    \[
+        \N(P) \defn \{ x \in \N \, \mid \, P(n) \text{ is true } \}    
+    \]
+    The conditions on $\N(P)$ imply that $\N(P)$ is inductive, which means $\N(P) \supseteq \N$ by definition on $\N$. But $\N(P) \subseteq \N$ by construction, so $\N(P) = \N$. 
+\end{proof}
+
+\begin{remark}
+    When trying to prove that $P(S(n))$ holds, the statement that $P(n)$ is true often bears the name of \textbf{induction hypothesis}.
+\end{remark}
+
+\begin{lemma} \label{natural-numbers-are-finite-ordinals}
+    For all $n \in \N$, the set $n$ equipped with the relation of set membership (i.e. for $i,j \in n$, we write $i < j$ if $i \in j$) is a finite ordinal. In other words, $\N$ is the set containing all the natural numbers.
+\end{lemma}
+
+\begin{proof}
+    We proceed by weak induction on $n$ with the proposition $P(n) \defn n$ is a natural number. The set $0 = \varnothing$ is vacuously a finite ordinal with the empty relation. Now suppose $n \in \N$ and $P(n)$ holds. We need to show that $S(n)$ is a finite ordinal. 
+    \\
+
+    We begin by showing that it is a poset. It is antisymmetric because for any sets $x,y$, we cannot have $x \in y$ and $y \in x$ by the Axiom of Regularity (c.f. \autoref{axioms-of-set-theory}). For transitivity, suppose $x,y,z \in S(n)$ satisfy $x \in y$ and $y \in z$. If $x,y,z \in n$, since $n$ is a poset, we deduce that $x \in z$. We cannot have two or more of $x,y,z$ to be equal to $n$ by the Axiom of Regularity. It remains to consider the cases where exactly one of $x,y,z$ are equal to $n$. If $x = n$, then $n = x \in y \in n$, contradicting the Axiom of Regularity. If $y = n$, then $n = y \in z \in n$, again a contradiction. If $z = n$, then $x \in S(n) \setminus \{z\} = n$ (because $x$ and $z$ are distinct), which means $x \in n = z$.
+    \\
+
+    We now show $S(n)$ is linearly ordered. Let $x,y \in S(n)$ be distinct elements. We need to show that $x \in y$ or $y \in x$. If $x,y \in n$, this follows by assumption on $n$. If not, then without loss of generality, assume $y = n$. Then $x \in S(n) \setminus \{n\} = n = y$.
+    \\
+
+    Let $T \subseteq S(n)$ be a subset. We want to show that $T$ has a minimum. If $T \subseteq n$, this is clear by the induction hypothesis on $n$. If $n \in T$, then there are two cases~: either $T = \{n\}$ has minimum $\min T = n$, or there exists $x \in T \cap (S(n) \setminus \{n\}) = T \cap n$, in which case $n \neq \min T$ because $x \in T$ and $x < n$. It follows that $\min T = \min(T \setminus \{n\})$ where the latter minimum exists by assumption on $n$. So $S(n)$ is well-ordered.
+    \\
+
+    To show that $S(n)$ is ordinal, we only have to show that $p \in S(n)$ implies $p \subseteq S(n)$. If $p \neq n$, then $p \in n$, so $p \subseteq n \subseteq S(n)$. Otherwise, $p = n \subseteq n \cup \{n\} = S(n)$. 
+    \\
+
+    It remains to show that $S(n)$ is finite. Let $T \subseteq S(n)$ be a subset. We already showed that $\min T$ exists. If $T \subseteq n$, then $\max T$ exists by assumption on $n$. If $n \in T$, we show that $n = \max T$. Indeed, since $S(n) = n \cup \{n\}$, note that
+    \[
+        T \setminus \{n\} \subseteq S(n) \setminus \{n\} = n,
+    \]
+    e.g. $x \in T \setminus \{n\}$ implies $x \in n$.
+\end{proof}
+
+\begin{lemma} \label{naturals-form-a-poset}
+    The set $\N$ is a poset with the relation of set membership.
+\end{lemma}
+
+\begin{proof}
+    Antisymmetry of $\in$ is clear. For transitivity, let $n_1, n_2, n_3 \in \N$ satisfy $n_1 \in n_2 \in n_3$. Since $n_3, S(n_3) \in \N$, they are finite ordinals with $\in$ as the relation. We have $n_1 \in n_2 \subseteq n_3 \subseteq S(n_3)$, so $n_1 \in S(n_3)$. Similarly, $n_2 \in n_3 \subseteq S(n_3)$, so $n_2 \in S(n_3)$. Since $n_1, n_2, n_3 \in S(n_3)$ and $(S(n_3), \in)$ is a poset, we deduce that $n_1 \in n_3$. 
+\end{proof}
+
+\begin{theorem}[Well-ordering of the naturals] \label{well-ordering-of-the-naturals}
+    The set $\N$ is an infinite ordinal with the relation of set membership.
+\end{theorem}
+
+\begin{proof}
+    We first show that $(\N,\in)$ is linearly ordered. For each $n \in \N$, we consider the proposition 
+    \[
+        P(n) \defn \forall m \in \N, (m \in n) \vee (m = n) \vee (m \ni n). 
+    \]
+    For each $m \in \N$, consider the proposition $Q_n(m) \defn (m \in n) \vee (m = n) \vee (m \ni n)$. We prove $Q_n(m)$ by induction on $m$. 
+    \\
+
+    First consider the case of $n = \varnothing$. If $m = \varnothing$, then $Q_n(m)$ holds trivially. If $Q_n(m)$ holds, then $m = \varnothing$ or $\varnothing \in m$ (we cannot have $m \in \varnothing$). In the first case, $\varnothing \in \varnothing \cup \{\varnothing\} = S(\varnothing) = S(m)$, and in the second case, $\varnothing \in m \subseteq m \cup \{m\} = S(m)$. In any case, $Q_n(S(m))$ holds. Therefore, $Q_n(m)$ holds for all $m \in \N$, which means $P(\varnothing)$ holds.
+    \\
+
+    Now suppose $P(n)$ is true, so we prove that $P(S(n))$ holds. We prove $Q_{S(n)}(m)$ by induction on $m$. We have $Q_{S(n)}(\varnothing) = Q_{\varnothing}(S(n))$, so that's already taken care of. We now have to show that if $Q_{S(n)}(m)$ holds, then so does $Q_{S(n)}(S(m))$. We know that either $m \ni S(n)$, $m = S(n)$ or $m \in S(n)$. In that first case, we have
+    \[
+        S(n) \in m \in S(m) \implies S(n) \in S(m),
+    \]
+    so $Q_{S(n)}(S(m))$ holds. In the second case, $S(n) = m \in S(m)$, thus again $Q_{S(n)}(S(m))$ holds. 
+    \\
+    
+    Let us now focus on the third case. If $m \in S(n) = n \cup \{n\}$, either $m = n$ (which implies $S(m) = S(n)$, hence $Q_{S(n)}(S(m))$ holds) or $m \in n$. Since $P(n)$ is true, we have $S(m) \in n$, $S(m) = n$ or $S(m) \ni n$. The first two options imply $S(m) \in n \cup \{n\} = S(n)$, so we have to exclude the third~; $n \in S(m) = m \cup \{m\}$ means either $n \in m$ (a contradiction since $m \in n$), or $n = m$ (also a contradiction since $m \in n = m$ is impossible). We just proved $P(S(n))$ is true, so $P(n)$ holds for all $n \in \N$, i.e. $(\N,\in)$ is linearly ordered. 
+    \\
+    
+    Now let $T \subseteq \N$ be a non-empty subset, and set $m \defn \bigcap_{t \in T} t \subseteq \N$. We claim that $m = \min T$. Since each $t \in T$ is a finite ordinal, so is $m$ (it suffices to verify that the required properties for natural numbers $k \in m$ are true because they hold for all $k \in t$ for all $t \in T$). Since $\N$ is linearly ordered, we have $m \in t$, $m=t$ or $m \ni t$~; the definition of $m$ implies $m \subseteq t$, so $t \in m$ would imply $m \in m$, a contradiction. Therefore, for $t \in T$, either $m \in t$ or $m = t$. If $m \in t$ for all $t \in T$, then by definition of $m$, that would imply $m \in \bigcap_{t \in T} t = m$, a contradiction. So there exists $t \in T$ with $t = m$, i.e. $m \in T$. This proves that $m = \min T$.  
+    \\
+
+    Note that since $\N$ is inductive, it cannot have a maximum~: if it did, call it $n \in \N$. Then $n \in S(n) \in \N$ is strictly greater, a contradiction. Therefore, $\N$ is infinite.
+\end{proof}
+
+\begin{definition} \label{first-infinite-ordinal}
+    The ordinal $(\N,\in)$ is called the \textbf{first infinite ordinal} and is denoted by $\omega$. 
+\end{definition}
+
+\begin{lemma} \label{nonzero-naturals-have-predecessors}
+    Let $n \in \N \setminus \{\varnothing\}$ be a natural number. Then $S(\max{(n)}) = n$.
+\end{lemma}
+
+\begin{proof}
+    ($\subseteq$) Let $k \in n$. By definition of the maximum, we have $k < \max{(n)}$ or $k = \max{(n)}$, which is equivalent to $k \in \max{(n)} \cup \{\max{(n)}\} = S(\max{(n)})$. This proves $n \subseteq S(\max{(n)})$.
+    \\
+    
+    ($\supseteq$) By definition of the maximum, $\max{(n)} \in n$, and $k \in \max{(n)} \in n$ implies $k \in n$ by Lemma \autoref{naturals-form-a-poset}. This implies $S(\max{(n)}) = \max{(n)} \cup \{\max{(n)}\} \subseteq n$.
+\end{proof}
+
+\begin{corollary}[Strong induction principle] \label{strong-induction-on-natural-numbers}
+    Let $P$ be a property satisfied by natural numbers (defined by a logical formula). If $P$ satisfies the two following conditions~:
+    \\
+
+    \begin{itemize}
+        \item[$\bullet$] $P(\varnothing)$ is true
+        \\
+
+        \item[$\bullet$] If $n \in \N$ and $P(k)$ is true for all $k \in n$, then $P(n)$ is true
+        \\
+        
+    \end{itemize}
+    then $P(n)$ is true for all $n \in \N$.
+\end{corollary}
+
+\begin{proof}
+    Let $P'$ be the property given by $P'(n) \defn \forall k \in n, P(k)$ is true. The property $P'(\varnothing)$ is vacuously true. If $n = \varnothing$, we just said $P'(\varnothing)$ is true by assumption and $P'(S(\varnothing))$ is equivalent to $P(\varnothing)$, which is assumed true. If $n \neq \varnothing$ and $P(k)$ is true for $k \in n$, in particular $\max{(n)} \in n$ is such that $P(\max{(n)})$ is true. By assumption on $P$ and by Lemma \autoref{nonzero-naturals-have-predecessors}, we see that $P(S(\max{(n)})) = P(n)$ is also true.
+    \\
+
+    By Theorem \autoref{weak-induction-on-natural-numbers}, we deduce that $P'(n)$ is true for all $n \in \N$. But since $n \in S(n)$ for all $n \in \N$ by definition of the successor function, this means $P(n)$ is true for all $n \in \N$. 
+\end{proof}
