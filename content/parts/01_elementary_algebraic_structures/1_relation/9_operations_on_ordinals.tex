@@ -1,0 +1,214 @@
+\section{Operations on ordinals}
+
+We are able to add numbers, so we should be able to add ordinals. But how should that work? Well, any definition that we take should definitely start with
+
+\[
+    \alpha + 1 \defn S(\alpha).     
+\]
+
+Also, if we managed to define $\alpha + \beta$, we should be able to define $\alpha + S(\beta)$ as the successor to $\alpha + \beta$. In other words, we would like the following~:
+\[
+    \alpha + S(\beta) = S(\alpha + \beta).
+\]
+However, ordinals are about \textit{order}, so we do not expect the following to hold for all ordinals~:
+\[
+    \alpha + \beta = \beta + \alpha.    
+\]
+We'll see an example of when this equality fails to hold.
+\\
+
+We will manipulate well-ordered sets which are not ordinals in the upcoming proofs, so we need a lemma.
+
+\begin{definition}[Downward-closed subsets] \label{downward-closed-subsets}
+    Let $(P, <)$ be a well-ordered set. A subset $T \subseteq P$ is called \textbf{downward-closed} if it is a proper subset and for any $\gamma \in P$ and $\delta \in T$, $\gamma < \delta$ implies $\gamma \in T$. 
+\end{definition}
+
+\begin{lemma} \label{downward-closed-subsets-of-ordinals-are-ordinals}
+    Let $\alpha$ be an ordinal. Then $\beta \subsetneq \alpha$ is downward-closed if and only if $\beta \in \alpha$. 
+\end{lemma}
+
+\begin{proof}
+    ($\Leftarrow$) Clearly $\beta \subsetneq \alpha$. If $\gamma \in \alpha$ and $\delta \in \beta$ satisfy $\gamma \in \delta$, we have $\delta \subseteq \beta$ because $\beta$ is an ordinal, so $\gamma \in \beta$. This proves $\beta$ is downward-closed.
+    \\
+
+    ($\Rightarrow$) It is clear that $\beta$ is linearly ordered as a subset of $\alpha$. Subsets of $\beta$ are subsets of $\alpha$, so non-empty subsets of $\beta$ admit a minimum, implying that $\beta$ is well-ordered. It remains to show that $\gamma \in \beta$ implies $\gamma \subseteq \beta$. Let $\delta \in \gamma$. Since $\beta$ is downward-closed, $\gamma \in \beta$ and $\delta \in \alpha$ satisfy $\gamma < \delta$ (i.e. $\gamma \in \delta$), this implies $\delta \in \beta$. Therefore $\gamma \subseteq \beta$, completing the proof.
+\end{proof}
+
+\begin{corollary} \label{downward-closed-subsets-of-well-ordered-sets-give-elements-of-ordinals}
+    Let $(P,<)$ be a well-ordered set and $Q \subsetneq P$ be a downward-closed subset, which is well-ordered. Suppose $P$ has order type $\alpha$ and $Q$ has order type $\beta$. Then $\beta \in \alpha$, and in particular $\beta \subsetneq \alpha$. So the elements of $\alpha$ are in one-to-one correspondence with the downward-closed subsets of $P$.
+\end{corollary}
+
+\begin{proof}
+    If $\Phi : (P,<) \to \alpha$ is a poset isomorphism, then $\Phi(Q) \subsetneq \alpha$ also has order type $\beta$ and is downward-closed, so we can apply Lemma \autoref{downward-closed-subsets-of-ordinals-are-ordinals}.
+\end{proof}
+
+\begin{remark} \label{dealing-with-downward-closed-subsets}
+    We can use Corollary \autoref{downward-closed-subsets-of-well-ordered-sets-give-elements-of-ordinals} in the following manner. Let $(P, <)$ be a well-ordered set of order type $\alpha$ with the unique poset isomorphism $\Phi : P \to \alpha$. Since $\Phi$ is bijective, increasing and has an increasing inverse, it establishes a bijection between the downward-closed proper subsets of $P$ and those of $\alpha$. But the downward-closed subsets of $\alpha$ are its elements, so we can deal with elements of $\alpha$ by dealing with downward-closed subsets of $P$. We will deal with well-ordered sets and their order types when defining operations on ordinals, so this will prove useful.
+\end{remark}
+
+\begin{definition} \label{ordinal-addition}
+    Let $\alpha,\beta$ be ordinals. The \textbf{ordinal addition} of $\alpha$ and $\beta$ is defined as the order type of the disjoint union of the strict poset $(\alpha \sqcup \beta, <)$ where we define $<$ in the following manner~:
+    \\
+    \begin{itemize}
+        \item[$\bullet$] If $\gamma,\delta \in \alpha$, then $\gamma < \delta$ if and only if $\gamma \in \delta$
+        \\
+
+        \item[$\bullet$] If $\gamma,\delta \in \beta$, then $\gamma < \delta$ if and only if $\gamma \in \delta$
+        \\
+
+        \item[$\bullet$] If $\gamma \in \alpha$ and $\delta \in \beta$, then $\gamma < \delta$. 
+        \\
+
+    \end{itemize}
+    It is denoted by $\alpha + \beta$.
+\end{definition}
+
+\begin{remark}
+    The poset $(\alpha \sqcup \beta, <)$ is well-ordered. It is easily seen to be linearly ordered by definition, and if $T \subseteq \alpha \sqcup \beta$ is a non-empty subset, if $T \cap \alpha \neq \varnothing$, then $\min T = \min(T \cap \alpha)$~; if $T \cap \alpha = \varnothing$, then $T \subseteq \beta$ and $\min T$ exists because $\beta$ is an ordinal.
+\end{remark}
+
+\begin{proposition} \label{properties-of-ordinal-addition}
+    Let $\alpha,\beta, \gamma$ be ordinals.
+    \\
+
+    \begin{itemize}
+        \item[(i)] We have $\alpha + 0 = \alpha = 0 + \alpha$.
+        \\
+
+        \item[(ii)] We have $\alpha + S(\beta) = S(\alpha + \beta)$. In particular, $\alpha + 1 = S(\alpha)$.
+        \\
+
+        \item[(iii)] If $\beta$ is a limit ordinal, we have $\alpha + \beta = \bigcup_{\gamma < \beta} (\alpha + \gamma)$.
+        \\
+
+        \item[(iv)] (Associativity) We have $\alpha + (\beta + \gamma) = (\alpha + \beta) + \gamma$. 
+        \\
+
+        \item[(v)] (Commutativity in $\N$) If $\alpha, \beta \in \N$ are natural numbers, then $\alpha + \beta = \beta + \alpha$.
+        \\
+
+    \end{itemize}
+\end{proposition}
+
+\begin{proof}
+    \begin{itemize}
+        \item[(i)] The disjoint union $\alpha + 0$ is isomorphic to $\alpha$ as a poset since $0 = \varnothing$ by definition, so its order type is $\alpha$. Therefore, $\alpha + 0 = \alpha$. The same argument works to prove that $0 + \alpha = \alpha$. \\
+
+        \item[(ii)] We produce a poset isomorphism $\Phi : \alpha + S(\beta) \to S(\alpha + \beta)$. As sets, we have 
+        \[
+            \alpha + S(\beta) = \alpha \sqcup (\beta \cup \{ \beta \}), \qquad S(\alpha+\beta) = (\alpha \sqcup \beta) \cup \{ \alpha \sqcup \beta \}    
+        \] 
+        We define $\Phi(\gamma) \defn \gamma$ if $\gamma \in \alpha$ or $\gamma \in \beta$, and we set $\Phi(\beta) \defn \alpha \sqcup \beta$. Note that we don't have to worry about $\beta \in \alpha$ to see that $\Phi$ is well-defined because we are speaking of $\Phi(\beta)$ in the element $\beta$ sitting in the disjoint union of $\alpha$ and $\beta \cup \{\beta\}$. 
+        \\
+
+        The partial order in both sets are actually defined exactly the same way when considering elements of $\alpha$ or $\beta$~; it only differs in that the maximum added to $\alpha + S(\beta)$ is called $\beta$, and the maximum added to $S(\alpha + \beta)$ is named $\alpha \cup \beta$. Since $\Phi$ identifies those two, it is a poset isomorphism, which means that $\alpha + S(\beta)$ and $S(\alpha + \beta)$ have the same order type, and are therefore equal.
+        \\
+
+        \item[(iii)] It is clear by the definition of disjoint union that $\alpha \sqcup \beta = \bigcup_{\delta < \beta} (\alpha \sqcup \delta)$ because $\beta = \bigcup_{\delta < \beta} \delta$ (since $\beta$ is a limit ordinal). But to show that $\alpha + \beta = \bigcup_{\delta < \beta} (\alpha + \delta)$, we will compare downward-closed subsets of $\alpha \sqcup \beta$ and $\bigcup_{\delta < \beta} (\alpha \sqcup \delta)$.
+        \\
+        
+        If $T \subseteq \alpha \sqcup \delta$ is a downward-closed subset, then $T \subseteq \alpha \sqcup \delta \subseteq \alpha \sqcup \beta$, thus $\bigcup_{\delta < \beta} (\alpha + \delta) \subseteq \alpha + \beta$. Conversely, suppose $T \subseteq \alpha \sqcup \beta$ is a downward-closed subset. Then $T \cap \beta = \delta$ is a downward-closed subset of $\beta$ (e.g. an ordinal $\delta \in \beta$), so that $T \subseteq \alpha \sqcup \delta \subsetneq \alpha \sqcup S(\delta)$. It follows that $T$ is a downward-closed subset of $\alpha \sqcup S(\delta)$ for some $\delta < \beta$, showing that $\alpha + \beta \subseteq \bigcup_{\delta < \beta} (\alpha + \delta)$ (because $\beta$ is a limit ordinal, which allows $S(\delta) \in \beta$ whenever $\delta \in \beta$), proving equality.
+        \\
+
+        \item[(iv)] The posets on both sides of the equality is isomorphic to the poset $\bigsqcup \{[\alpha]_0, [\beta]_1, [\gamma]_2\}$ where elements of $[\alpha]_0$ are smaller than those in $[\beta]_1$, which are in turn smaller than those in $[\gamma]_2$. Since they have the same order type, they are equal.
+        \\
+
+        \item[(v)] We first show as a little lemma that if $\alpha,\beta$ are natural numbers, then 
+        \[
+            \alpha + S(\beta) = S(\alpha + \beta) = S(\alpha) + \beta.     
+        \]
+        The first equality is from part~(ii). As for the second, we proceed by induction on $\beta$. We have nothing to prove for $\beta = 0$ by part~(i). If equality holds for $\beta$, then
+        \[
+            S(\alpha + S(\beta)) = S(S(\alpha + \beta)) = S(S(\alpha) + \beta) = S(\alpha) + S(\beta).     
+        \]
+        
+        Now, we proceed by induction on $\beta$ again to prove that $\alpha + \beta = \beta + \alpha$. Clearly $\alpha + 0 = \alpha = 0 + \alpha$ by part~(i). Now suppose $\alpha + \beta = \beta + \alpha$. Then by part~(ii) and our little lemma, we have
+        \[
+            \alpha + S(\beta) = S(\alpha + \beta) = S(\beta + \alpha) = S(\beta) + \alpha.   
+        \]
+    \end{itemize}
+\end{proof}
+
+\begin{definition}[Ordinal multiplication] \label{ordinal-multiplication}
+    Let $\alpha,\beta$ be ordinals. The \textbf{ordinal multiplication} of $\alpha$ and $\beta$ is defined as the order type of the strict poset $(\alpha \times \beta, <)$, where we give the following order on its elements $(\gamma,\delta) \in \alpha \times \beta$ with $\gamma \in \alpha$ and $\delta \in \beta$~: we set $(\gamma_1, \delta_1) < (\gamma_2,\delta_2)$ in precisely two situations~:
+    \\
+    \begin{itemize}
+        \item[$\bullet$] if $\delta_1 < \delta_2$
+        \\
+
+        \item[$\bullet$] if $\gamma_1 < \gamma_2$ and $\delta_1 = \delta_2$. 
+        \\
+
+    \end{itemize}
+    The ordinal multiplication of $\alpha$ and $\beta$ is denoted by $\alpha \cdot \beta$.
+    \\
+
+\end{definition}
+
+\begin{remark}
+    The poset $(\alpha \times \beta, <)$ is well-ordered. To see this, first note that it is linearly ordered because both $\alpha$ and $\beta$ are. If $\delta \in \beta$ and $T \subseteq \alpha \times \beta$ is a non-empty subset, consider the subsets 
+    \[
+        \pi_{\beta}(T) \defn \{ \delta \in \beta \, | \, \exists \gamma \in \alpha \st (\gamma,\delta) \in T \}, \qquad \pi_{\beta}^{-1}(\delta) \cap T \defn \{ (\gamma,\delta') \in T \, | \, \delta' = \delta \}.
+    \]
+    The notation comes from the fact that if $\pi_{\beta} : \alpha \times \beta \to \beta$ is the map given by $(\gamma,\delta) \mapsto \delta$, then $\pi_{\beta}(T)$ is the image of $T$ under $\pi_{\beta}$, and $\pi_{\beta}^{-1}(\delta)$ is the inverse image of $\{\delta\}$ under $\pi_{\beta}$. Note that $\pi_{\beta}$ is surjective and non-decreasing, i.e. $(\gamma,\delta) \le (\gamma', \delta')$ implies $\delta \le \delta'$.
+    \\
+    
+    Set $\hat{\delta} \defn \min \pi_{\beta}(T)$ and $\hat{\gamma} = \min (\pi_{\beta}^{-1}(\hat{\delta}) \cap T)$. We claim that $(\hat{\gamma}, \hat{\delta}) = \min T$. Let $(\gamma,\delta) \in T$. By definition of $\hat{\delta}$, we have $\hat{\delta} \le \delta$ since $(\gamma,\delta) \in T$ implies $\delta \in \pi_{\beta}(T)$. If $\hat{\delta} < \delta$, then $(\hat{\gamma}, \hat{\delta}) < (\gamma,\delta)$~; and if $\hat{\delta} = \delta$, by definition of $\hat{\gamma}$, we have $\hat{\gamma} \le \gamma$ because $(\gamma,\hat{\delta}) \in \pi_{\beta}^{-1}(\hat{\delta}) \cap T$. Therefore, $(\hat{\gamma}, \hat{\delta}) \le (\gamma,\delta)$, proving the claim that $\min T$ exists.
+\end{remark}
+
+\begin{proposition} \label{properties-of-ordinal-multiplication}
+    Let $\alpha,\beta, \gamma$ be ordinals.
+    \\
+
+    \begin{itemize}
+        \item[(i)] We have $\alpha \cdot 0 = 0 = 0 \cdot \alpha$.
+        \\
+
+        \item[(ii)] We have $\alpha \cdot S(\beta) = (\alpha \cdot \beta) + \alpha$. In particular, $\alpha \cdot 1 = \alpha = 1 \cdot \alpha$.
+        \\
+
+        \item[(iii)] If $\beta$ is a limit ordinal, we have $\alpha \cdot \beta = \bigcup_{\gamma < \beta} (\alpha \cdot \gamma)$.
+        \\
+
+        \item[(iv)] (Associativity) We have $\alpha \cdot (\beta \cdot \gamma) = (\alpha \cdot \beta) \cdot \gamma$. 
+        \\
+
+        \item[(v)] (Commutativity in $\N$) If $\alpha, \beta \in \N$ are natural numbers, then $\alpha \cdot \beta = \beta \cdot \alpha$.
+        \\
+
+    \end{itemize}
+\end{proposition}
+
+\begin{proof}
+    \begin{itemize}
+        \item[(i)] The products $\alpha \times 0$ and $0 \times \alpha$ are both empty, so they both have the ordinal of the empty set, i.e. $0$.
+        \\
+
+        \item[(ii)] We produce a poset isomorphism $\Phi : \alpha \cdot S(\beta) \to (\alpha \cdot \beta) + \alpha$. The set $\alpha \times (\beta \cup \{\beta\})$ can be written as $(\alpha \times \beta) \cup (\alpha \times \{ \beta \})$, and those two subsets form a partition of $\alpha \times S(\beta)$. We let $\Phi$ be the composition of the following maps
+        \[
+            \alpha \cdot S(\beta) \simeq \alpha \times S(\beta) = (\alpha \times \beta) \cup (\alpha \times \{\beta\}) \to (\alpha \times \beta) \sqcup \alpha \simeq (\alpha \cdot \beta) \sqcup \alpha \simeq (\alpha \cdot \beta) + \alpha
+        \]
+        where we send the subset $\alpha \times \beta$ to itself via the identity map, and we identify $\alpha \times \{\beta\}$ with $\alpha$. On both sides, the elements of $\alpha \times \beta$ are smaller than the ones not in it, and the elements in $\alpha \times \{\beta\}$ and the copy of $\alpha$ in the sum $\alpha \cdot \beta + \alpha$ are both ordered as in $\alpha$. Therefore, $\Phi$ is a poset isomorphism, giving our equality. 
+        \\
+        
+        The first equality in the statement about $1$ comes from 
+        \[
+            \alpha \cdot 1 = \alpha \cdot S(0) = \alpha \cdot 0 + \alpha = 0 + \alpha = \alpha,
+        \]
+        but for the second one, we need to see that there is a poset isomorphism $\Phi : \alpha \to \{\varnothing\} \times \alpha$ given by $\gamma \mapsto (\varnothing, \gamma)$, thus $\alpha = 1 \cdot \alpha$.
+        \\
+
+        \item[(iii)] For every $\delta \in \beta$, we have $\alpha \times \delta \subseteq \alpha \times \beta$, so that $\bigcup_{\delta < \beta} \alpha \times \delta \subseteq \alpha \times \beta$. Since $\beta$ is a limit ordinal, for any $\delta' \in \beta$, we also have $S(\delta') \in \beta$, thus if $(\gamma,\delta') \in \alpha \times \beta$, we have $(\gamma,\delta') \in \alpha \times S(\delta') \subseteq \bigcup_{\delta < \beta} \alpha \times \delta$, proving that $\bigcup_{\delta < \beta} \alpha \times \delta \supseteq \alpha \times \beta$, thus we have equality.
+        \\
+
+        Downward-closed subsets of $\alpha \times \delta$ are also downward-closed subsets of $\alpha \times \beta$, so $\alpha \cdot \delta \subseteq \alpha \cdot \beta$~; taking the union over all $\delta < \beta$ gives $\bigcup_{\delta < \beta} \alpha \cdot \delta \subseteq \alpha \cdot \beta$. For the reverse inclusion, suppose $T \subsetneq \alpha \times \beta$ is a downward-closed subset, and pick $(\gamma,\delta) \in (\alpha \times \beta) \setminus T$. If $(\gamma', \delta') \in T$, then $(\gamma',\delta') < (\gamma,\delta)$, since $(\gamma', \delta') \ge (\gamma,\delta)$ would imply $(\gamma,\delta) \in T$, which is assumed false. Therefore, $T \subseteq \alpha \times \delta \subsetneq \alpha \times S(\delta)$, so that $\alpha \cdot \beta \subseteq \bigcup_{\delta < \beta} \alpha \cdot \delta$. 
+        \\
+
+        \item[(iv)] a
+        \\
+
+        \item[(v)] a
+        \\
+
+    \end{itemize}
+\end{proof}
